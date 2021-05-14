@@ -27,7 +27,5 @@ jobs:
       - run: yarn test
 
       - run: yarn build
-      
-      - run: curl -X POST -H 'Content-type: application/json' --data '{"text":"Projectx Build Complete"}' https://hooks.slack.com/services/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
 
-
+      - run: yarn webhook-slack
