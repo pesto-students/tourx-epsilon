@@ -16,6 +16,13 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
+      - run: 
+          name: aws client installation
+          command: 
+              sudo apt-get update
+              sudo apt install python3-pip
+              sudo pip3 install awsebcli --upgrade
+
       - run: yarn install
 
       - save_cache:
@@ -28,4 +35,13 @@ jobs:
 
       - run: yarn build
 
+      - run: aws s3 sync ./build s3://projectx-react
+
       - run: yarn webhook-slack
+
+workflows:
+  version: 2
+  execute_bulk:
+    jobs:
+      - build
+      
