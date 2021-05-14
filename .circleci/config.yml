@@ -1,4 +1,9 @@
 version: 2
+
+orbs: 
+  node: circleci/node@4.1.0
+  aws-ecr: circleci/aws-ecr@6.15.0
+
 jobs:
   build:
     docker:
@@ -16,14 +21,6 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: apt-get install -y sudo
-      - run: 
-          name: aws client installation
-          command: 
-              sudo apt-get update
-              sudo apt install python3-pip
-              sudo pip3 install awsebcli --upgrade
-
       - run: yarn install
 
       - save_cache:
@@ -36,13 +33,17 @@ jobs:
 
       - run: yarn build
 
-      - run: aws s3 sync ./build s3://projectx-react
-
       - run: yarn webhook-slack
 
 workflows:
-  version: 2
-  execute_bulk:
+  node-tests:
     jobs:
       - build
-      
+      # Envs: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION, AWS_ECR_ACCOUNT_URL
+      - aws-ecr/build-and-push-image:
+          repo: projectx
+          tag: "latest,v0.1.${CIRCLE_BUILD_NUM}"
+          dockerfile: build/Dockerfile.prod
+          path: .
+          requires:
+            - test
