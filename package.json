@@ -23,7 +23,7 @@
     "format": "prettier --write src/**/*.ts{,x}",
     "lint": "tsc --noEmit && eslint src/**/*.ts{,x}",
     "prepare": "husky install",
-    "webhook-slack": "curl -X POST -H 'Content-type: application/json' --data '{\"text\":\"Projectx Build Complete\"}' https://hooks.slack.com/services/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"
+    "webhook-slack": "curl -X POST -H 'Content-type: application/json' --data '{\"text\":\"Projectx Build Complete\"}' https://hooks.slack.com/services/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"
   },
   "eslintConfig": {
     "extends": [
