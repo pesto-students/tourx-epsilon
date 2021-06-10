@@ -8,5 +8,6 @@ body {
     background: ${({ theme }) => theme.colors.body};
     color: ${({ theme }) => theme.colors.text};
     font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
   }
 `;

@@ -7,6 +7,7 @@ const normalize = css`
   }
   body {
     margin: 0;
+    box-sizing: border-box;
   }
   main {
     display: block;
