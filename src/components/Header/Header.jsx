@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React, { useState, useEffect } from "react";
-import { Toolbar, Drawer, MenuItem, Button } from "@material-ui/core";
+import { Toolbar, Drawer, MenuItem } from "@material-ui/core";
 import PropTypes from "prop-types";
 import MenuIcon from "@material-ui/icons/Menu";
 import {

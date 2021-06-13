@@ -71,7 +71,7 @@ const Signup = (props: any): JSX.Element => {
   );
 };
 
-const mapStateToProps = (states: any) => ({});
+const mapStateToProps = () => ({});
 
 export default connect(mapStateToProps, { setFormValues, setShowWelcomeModal })(
   Signup

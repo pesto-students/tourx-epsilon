@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
@@ -33,13 +34,13 @@ function MostViewed() {
       setState({ oldSlide: current, activeSlide: next }),
     //  afterChange: (current) => setState({ activeSlide: current })
   };
-  const handleNext = () => {
-    slide.slickNext();
-    // console.log("asd");
-  };
-  const handlePrev = () => {
-    slide.slickPrev();
-  };
+  // const handleNext = () => {
+  //   slide.slickNext();
+  //   // console.log("asd");
+  // };
+  // const handlePrev = () => {
+  //   slide.slickPrev();
+  // };
 
   function SamplePrevArrow(props) {
     const { onClick, className, style } = props;
@@ -71,7 +72,7 @@ function MostViewed() {
   return (
     <Wrapper>
       <Slider {...settings} ref={(c) => (slide = c)}>
-        {[0, 2, 0, 0, 0, 0, 0, 0, 0].map((i) => {
+        {[0, 2, 0, 0, 0, 0, 0, 0, 0].map(() => {
           return (
             <Container>
               <InnerWrapper>

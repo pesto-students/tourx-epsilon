@@ -1,4 +1,6 @@
 import { Dispatch } from "redux";
+import { GET } from "../../api";
+import { BACKEND_BASE_URL, STATES_ROUTES } from "../../api/routes";
 import {
   FETCH_CITIES,
   FETCH_STATES,
@@ -17,38 +19,12 @@ import SignupProps from "./SignUpForm/Signup.interface";
 
 export const fetchStates =
   () =>
-  (dispatch: Dispatch): void => {
-    const states = [
-      {
-        id: 1,
-        title: "Lucknow",
-        value: "lucknow",
-      },
-      {
-        id: 2,
-        title: "Kanpur",
-        value: "Kanpur",
-      },
-      {
-        id: 3,
-        title: "Delhi",
-        value: "Delhi",
-      },
-      {
-        id: 4,
-        title: "Haryana",
-        value: "Haryana",
-      },
-      {
-        id: 5,
-        title: "Patna",
-        value: "Patna",
-      },
-    ];
+  async (dispatch: Dispatch): Promise<void> => {
+    const states = await GET(`${BACKEND_BASE_URL}/${STATES_ROUTES}`);
 
     dispatch({
       type: FETCH_STATES,
-      payload: states,
+      payload: states?.data ?? [],
     });
   };
 
@@ -132,6 +108,7 @@ export const searchCategory =
     dispatch({
       type: SEARCH_CATEGORIES,
       payload: category,
+      data: query,
     });
   };
 
