@@ -7,6 +7,7 @@ import { useTheme } from "./theme/useTheme";
 import { GlobalStyles } from "./theme/GlobalStyles";
 import Routes from "./routes";
 import store from "./redux/index";
+import "react-image-lightbox/style.css";
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 function App() {

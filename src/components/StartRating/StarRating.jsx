@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React, { useEffect, useState } from "react";
@@ -28,13 +29,13 @@ function StarRating({ rating, width, height, color }) {
   return (
     <Wrapper>
       {state.full &&
-        new Array(state.full).fill(0).map(() => {
+        new Array(state.full).fill(0).map((_i) => {
           return (
             <Star color={color} width={width} height={height} key={uuid()} />
           );
         })}
       {state.half &&
-        new Array(state.half).fill(0).map(() => {
+        new Array(state.half).fill(0).map((i) => {
           return (
             <StarHalf
               color={color}
@@ -45,7 +46,7 @@ function StarRating({ rating, width, height, color }) {
           );
         })}
       {state.empty &&
-        new Array(state.empty).fill(0).map(() => {
+        new Array(state.empty).fill(0).map((i) => {
           return (
             <StarOutline
               color={color}

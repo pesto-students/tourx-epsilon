@@ -3,7 +3,7 @@ const data = [
     id: 1,
     name: "Swaswara, Gokarna | Luxury Staycation Deal",
     bg_url:
-      "https://res.cloudinary.com/thrillophilia/image/upload/c_fill,f_auto,fl_progressive.strip_profile,g_auto,h_600,q_auto,w_auto/v1/filestore/u4quffcz51bqf4iktfeqhb7scca1_swaswara1.png",
+      "https://res.cloudinary.com/thrillophilia/image/upload/c_fill,f_auto,fl_progressive.strip_profile,g_auto,h_600,q_auto,w_auto/v1/filestore/916xlz92pezgixq4ktw8cvz6uaez_1596528664_246620642.jpg",
     thumbnail_url:
       "https://res.cloudinary.com/thrillophilia/image/upload/c_fill,dpr_1.5,f_auto,fl_progressive.strip_profile,g_center,h_183,q_auto,w_245/v1/filestore/u4quffcz51bqf4iktfeqhb7scca1_swaswara1.png",
     description:

@@ -3,19 +3,16 @@
 import React, { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import Icon from "@material-ui/core/Icon";
-import { Button } from "@material-ui/core";
+import { Button, useMediaQuery } from "@material-ui/core";
 import Slider from "../Slider/Slider";
 import { InfoWrapper, Info, Title, Wrapper, Section } from "./Style";
 import data from "../Slider/data";
 import Header from "../Header/Header";
 
-// const handleClick = () => {
-//   console.log("Clicked");
-// };
-
 const HeroComponent = () => {
   const [state, setState] = useState({ oldSlide: 0, activeSlide: 0 });
   const [movedBelow, setMovedBelow] = useState(false);
+  const isMobile = useMediaQuery("(max-width:600px)");
   const changeNavbarColor = () => {
     if (window.scrollY >= 80) {
       setMovedBelow(true);
@@ -27,7 +24,7 @@ const HeroComponent = () => {
   useEffect(() => {
     window.addEventListener("scroll", changeNavbarColor);
     return () => {
-      window.removeEventListener("scroll");
+      window.removeEventListener("scroll", changeNavbarColor);
     };
   }, []);
 
@@ -81,7 +78,7 @@ const HeroComponent = () => {
             <Button
               variant="contained"
               color="primary"
-              size="large"
+              size={isMobile ? "small" : "large"}
               endIcon={<Icon>send</Icon>}
             >
               Explore

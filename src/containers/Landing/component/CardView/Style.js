@@ -8,6 +8,12 @@ export const CardWrapper = styled(Card)`
   height: 350px;
   position: relative;
   border-radius: 10px !important;
+  @media screen and (max-width: 369px) {
+    height: 180px;
+  }
+  @media screen and (max-width: 540px) and (min-width: 368px) {
+    height: 220px;
+  }
 `;
 export const Image = styled(CardMedia)`
   /* position: absolute; */
@@ -18,6 +24,9 @@ export const Image = styled(CardMedia)`
 export const Info = styled(CardContent)`
   position: absolute;
   bottom: 10px;
+  @media screen and (max-width: 540px) {
+    padding-bottom: 10px !important;
+  }
 `;
 
 export const Overlay = styled.div`
@@ -32,6 +41,9 @@ export const Title = styled.div`
   font-weight: 500;
   color: ${(props) => props.theme.colors.white};
   margin-bottom: 5px;
+  @media screen and (max-width: 540px) {
+    font-size: 16px;
+  }
 `;
 export const Description = styled.div`
   font-size: 14px;
@@ -39,6 +51,9 @@ export const Description = styled.div`
   letter-spacing: 1.5px;
   color: ${(props) => props.theme.colors.white};
   margin-bottom: 20px;
+  @media screen and (max-width: 540px) {
+    margin-bottom: 10px;
+  }
 `;
 export const IconWrapper = styled.div`
   display: flex;
@@ -49,10 +64,20 @@ export const Tag = styled.div`
   font-weight: 500;
   color: ${(props) => props.theme.colors.white};
   margin-bottom: 5px;
+  @media screen and (max-width: 540px) {
+    font-size: 12px;
+  }
 `;
-export const Icon = styled.div``;
+export const Icon = styled.div`
+  @media screen and (max-width: 540px) {
+    font-size: 12px;
+  }
+`;
 export const Text = styled.div`
   font-size: 16px;
   font-weight: 400;
   color: ${(props) => props.theme.colors.white};
+  @media screen and (max-width: 540px) {
+    font-size: 12px;
+  }
 `;

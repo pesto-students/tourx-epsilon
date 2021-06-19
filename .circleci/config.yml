@@ -2,8 +2,8 @@ jobs:
   build:
     docker:
       - image: node:12.20.1
-      - image: 'cimg/python:3.6'
-      
+      - image: "cimg/python:3.6"
+
     working_directory: ~/repo
     steps:
       - checkout
@@ -19,12 +19,12 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       # run tests!
-#     - run: yarn test
+      #     - run: yarn test
       - run: yarn build
       - aws-s3/sync:
-          arguments: '--delete'
+          arguments: "--delete"
           from: build/
-          to: 's3://projectx-frontend'
+          to: "s3://projectx-frontend"
 
       - run: yarn webhook-slack
 orbs:

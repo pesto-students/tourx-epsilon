@@ -1,12 +1,8 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable import/prefer-default-export */
 import styled from "styled-components";
-import {
-  Toolbar,
-  Typography,
-  Button,
-  AppBar,
-  IconButton,
-} from "@material-ui/core";
+import { Toolbar, Button, AppBar, IconButton } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 export const HeaderWrapper = styled.div`
   .MuiPaper-elevation4 {
@@ -27,12 +23,18 @@ export const DrawerContainer = styled.div`
   padding: 20px 30px;
 `;
 
-export const LogoItem = styled(Typography)`
+export const LogoItem = styled(Link)`
   font-weight: 600;
   color: ${(props) =>
     props.isTransparent ? "#fffefe" : props.theme.colors.black};
   text-align: left;
   font-size: 30px !important;
+  &:link {
+    text-decoration: none;
+  }
+  @media screen and (max-width: 540px) {
+    font-size: 24px !important;
+  }
 `;
 
 export const MenuButton = styled(Button)`
@@ -47,24 +49,40 @@ export const MenuButton = styled(Button)`
 `;
 export const StyledAppBar = styled(AppBar)`
   background-color: #400ccc;
-  padding-right: 79px;
+  padding-right: 118px;
   padding-left: 118px;
   padding-top: 10px;
   height: 80px;
   @media (max-width: 900px) {
-    padding-left: 0 !important;
+    padding-left: 0px !important;
     padding-right: 0px;
+  }
+  @media screen and (max-width: 540px) {
+    height: auto !important;
+    padding-left: 0px !important;
+    padding-right: 0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
 `;
 
 export const ActionButton = styled(Button)`
   background-color: ${(props) =>
-    props.outline ? "transparent" : props.theme.colors.black} !important ;
+    props.outline === "outline"
+      ? "transparent"
+      : props.theme.colors.black} !important ;
   color: ${(props) =>
-    props.isTransparent
+    props.isTransparent && props.outline === "contained"
       ? props.theme.colors.white
-      : props.theme.colors.black} !important;
-  border: ${(props) => (props.outline ? "1px solid" : "none")} !important;
+      : !props.isTransparent && props.outline === "contained"
+      ? props.theme.colors.white
+      : props.isTransparent && props.outline === "outline"
+      ? props.theme.colors.white
+      : !props.isTransparent && props.outline === "outline"
+      ? props.theme.colors.black
+      : props.theme.colors.white} !important;
+  border: ${(props) =>
+    props.outline === "outline" ? "1px solid" : "none"} !important;
   border-color: ${(props) =>
     props.isTransparent ? "white" : "black"} !important;
   margin: 8px 20px !important;
@@ -74,7 +92,7 @@ export const ActionButton = styled(Button)`
 `;
 
 export const MenuIconButton = styled(IconButton)`
-  color: white !important;
+  color: ${(props) => (props.isTransparent ? "white" : "black")} !important;
 `;
 
 export const EndWrapper = styled.div`

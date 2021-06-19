@@ -76,7 +76,7 @@ export const setCurrentCity = (value: string) => ({
 });
 
 export const searchCategory =
-  (query: string) =>
+  () =>
   (dispatch: Dispatch): void => {
     const category = [
       {
@@ -108,7 +108,6 @@ export const searchCategory =
     dispatch({
       type: SEARCH_CATEGORIES,
       payload: category,
-      data: query,
     });
   };
 

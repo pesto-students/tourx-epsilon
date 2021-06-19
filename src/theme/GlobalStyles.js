@@ -9,5 +9,8 @@ body {
     color: ${({ theme }) => theme.colors.text};
     font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
+    a:link{
+      text-decoration: none;
+    }
   }
 `;

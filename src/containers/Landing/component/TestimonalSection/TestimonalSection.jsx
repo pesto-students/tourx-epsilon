@@ -1,16 +1,24 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import React from "react";
 import { uuid } from "uuidv4";
+import Grid from "@material-ui/core/Grid";
 import avatar from "../../../../static/images/taras-shypka-QEgHL8NN7nM-unsplash.jpeg";
 import TestimonalCard from "../../../../components/TestimonalCard/TestimonalCard";
 import { Container } from "./Style";
 
-function TestimonalSection() {
+function TestimonalSection({ padding }) {
   return (
-    <Container>
-      {data.map((item) => {
-        return <TestimonalCard data={item} key={uuid()} />;
-      })}
+    <Container padding={padding}>
+      <Grid container direction="row" justify="center" spacing={3}>
+        {data.map((item) => {
+          return (
+            <Grid item xs={12} lg={4} md={4} sm={6}>
+              <TestimonalCard data={item} key={uuid()} />
+            </Grid>
+          );
+        })}
+      </Grid>
     </Container>
   );
 }
@@ -18,13 +26,6 @@ function TestimonalSection() {
 export default TestimonalSection;
 
 const data = [
-  {
-    review:
-      "TourX is such a app which makes our life easy when it come to new cities",
-    name: "Jason P",
-    rating: 4.5,
-    img: avatar,
-  },
   {
     review:
       "TourX is such a app which makes our life easy when it come to new cities",

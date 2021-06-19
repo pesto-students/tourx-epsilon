@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from "react";
 import { LocationOnRounded } from "@material-ui/icons";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import {
   CardWrapper,
   Image,
@@ -15,6 +16,7 @@ import {
 } from "./Style";
 
 function CardView() {
+  const isMobile = useMediaQuery("(max-width:600px)");
   return (
     <CardWrapper>
       <Image
@@ -30,7 +32,9 @@ function CardView() {
           <Description>Some Good Area</Description>
           <Tag>245 Rooms</Tag>
           <IconWrapper>
-            <LocationOnRounded style={{ color: "white", fontSize: "20px" }} />
+            <LocationOnRounded
+              style={{ color: "white", fontSize: isMobile ? "15px" : "20px" }}
+            />
             <Text>Kerala</Text>2
           </IconWrapper>
         </Info>
