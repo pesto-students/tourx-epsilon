@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+export interface InputProps {
+  ["data-icon"]: string | undefined;
+}
+
 export default styled.input`
   padding: 24px;
   padding-left: 64px;
@@ -8,7 +12,7 @@ export default styled.input`
   color: black;
   outline: none;
   border-radius: 10px;
-  ${(props: any) =>
+  ${(props: InputProps) =>
     props["data-icon"] &&
     `background: url("${props["data-icon"]}")
     no-repeat scroll 17px 20px;`}

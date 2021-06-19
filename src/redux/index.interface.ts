@@ -1,16 +1,19 @@
-import { Category } from "../containers/WelcomeGuide/PickPreferences/PickPreferences.interface";
+import store from ".";
 
+export interface User {
+  username: string;
+  password: string;
+}
 export interface InitState {
-  selectedCity: string;
   selectedState: string;
+  selectedCity: string;
   states: [];
   cities: [];
-  category: Category[];
-  selectedCategory: Category[];
+  category: [];
+  selectedCategory: [];
+  showSignup: boolean;
+  credentials: User;
+  showWelcomeModal: boolean;
 }
 
-export interface Action {
-  type: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  payload: any;
-}
+export type RootState = ReturnType<typeof store.getState>;

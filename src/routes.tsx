@@ -6,6 +6,9 @@ const Landing = React.lazy(() => import("./containers/Landing/Landing"));
 const DetailsPage = React.lazy(
   () => import("./containers/DetailsPage/DetailsPage")
 );
+const CategoryListing = React.lazy(
+  () => import("./containers/CategoryListing/CategoryListing")
+);
 
 const Routes = () => {
   return (
@@ -13,6 +16,11 @@ const Routes = () => {
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/category/9023132" component={DetailsPage} />
+        <Route
+          exact
+          path="/category/:ct_name/:ct_id"
+          component={CategoryListing}
+        />
       </Switch>
     </React.Suspense>
   );

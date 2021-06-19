@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import SelectBox from "../../../components/SelectBox/SelectBox";
+import { RootState } from "../../../redux/index.interface";
 import {
   fetchStates,
   fetchCities,
@@ -46,7 +47,7 @@ const PickLocation = (props: any): JSX.Element => {
   );
 };
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   states: state.welcomeGuide.states,
   cities: state.welcomeGuide.cities,
   selectedState: state.welcomeGuide.selectedState,

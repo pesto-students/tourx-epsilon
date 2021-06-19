@@ -26,7 +26,7 @@ const headersData = [
     href: "/",
   },
 ];
-const Header = ({ isTransparent }) => {
+const Header = ({ isTransparent, elevation }) => {
   const [state, setState] = useState({
     mobileView: false,
     drawerOpen: false,
@@ -168,7 +168,7 @@ const Header = ({ isTransparent }) => {
   };
 
   return (
-    <HeaderWrapper elevation={isTransparent ? "none" : "apply"}>
+    <HeaderWrapper elevation={isTransparent ? "none" : elevation}>
       <header>
         <StyledAppBar color={isTransparent ? "transparent" : "light"}>
           {mobileView ? displayMobile() : displayDesktop()}
@@ -180,10 +180,12 @@ const Header = ({ isTransparent }) => {
 
 Header.propTypes = {
   isTransparent: PropTypes.bool,
+  elevation: PropTypes.string,
 };
 
 Header.defaultProps = {
   isTransparent: false,
+  elevation: "apply",
 };
 
 export default Header;

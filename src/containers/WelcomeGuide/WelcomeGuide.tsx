@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Stepper from "../../components/Stepper/Stepper";
+import { RootState } from "../../redux/index.interface";
 import { showSignupForm } from "./action";
 import PickLocation from "./PickLocation/PickLocation";
 import PickPreferences from "./PickPreferences/PickPreferences";
@@ -42,7 +43,7 @@ const WelcomeGuide = (props: any): JSX.Element => {
   );
 };
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   showSignup: state.welcomeGuide.showSignup,
 });
 

@@ -23,6 +23,7 @@ import {
 } from "./style";
 import { Category } from "./PickPreferences.interface";
 import sanitizeString from "../../../Library/helper";
+import { RootState } from "../../../redux/index.interface";
 
 const PickPreferences = (props: any): JSX.Element => {
   const { categories, selectedCategory } = props;
@@ -106,7 +107,7 @@ const PickPreferences = (props: any): JSX.Element => {
   );
 };
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: RootState) => ({
   categories: state.welcomeGuide.category,
   selectedCategory: state.welcomeGuide.selectedCategory,
 });

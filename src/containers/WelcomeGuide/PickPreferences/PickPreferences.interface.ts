@@ -3,6 +3,7 @@ export interface Category {
   title: string;
   options: string;
   img: string;
+  slug: string;
 }
 
 export interface Demo {

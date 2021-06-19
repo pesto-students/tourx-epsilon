@@ -2,7 +2,7 @@ import React from "react";
 import { Checkbox, SquareOutline } from "react-ionicons";
 import useGenericState from "../../Library/useGenericState";
 
-const StyledCheckbox = () => {
+const StyledCheckbox = (): JSX.Element => {
   const [state, setState] = useGenericState({
     checked: false,
   });
