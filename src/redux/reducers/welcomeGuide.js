@@ -10,6 +10,8 @@ import {
   SET_SHOW_WELCOME_MODAL,
   SHOW_SIGNUP_FORM,
   UPDATE_SELECTED_CATEGORIES,
+  START_LOADING,
+  STOP_LOADING,
 } from "../../containers/WelcomeGuide/constant";
 
 const initialState = {
@@ -98,6 +100,18 @@ export default (state = initialState, action) => {
       return {
         ...state,
         showWelcomeModal: false,
+      };
+    }
+    case START_LOADING: {
+      return {
+        ...state,
+        categoryLoading: true,
+      };
+    }
+    case STOP_LOADING: {
+      return {
+        ...state,
+        categoryLoading: false,
       };
     }
     default:
