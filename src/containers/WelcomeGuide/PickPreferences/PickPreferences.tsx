@@ -99,7 +99,6 @@ const PickPreferences = (props: any): JSX.Element => {
               <Title>{category.title}</Title>
               <SubTitle>{`${category.options}+ Options`}</SubTitle>
             </div>
-            <div />
           </CatagoryCard>
         ))}
       </CategoryContainer>

@@ -11,9 +11,9 @@ import Button from "@material-ui/core/Button";
 import { SectionTitle, Anchor } from "./style";
 import MostViewed from "./component/MostViewed/MostViewed";
 import HeroComponent from "../../components/HeroComponent/HeroComponent";
-
 import TestimonalSection from "./component/TestimonalSection/TestimonalSection";
 import WelcomeGuide from "../WelcomeGuide/WelcomeGuide";
+import CategorySection from "./component/CategorySection/CategorySection";
 
 const Landing = (props) => {
   const { showWelcomeDialog } = props;
@@ -39,6 +39,8 @@ const Landing = (props) => {
   return (
     <>
       <HeroComponent />
+      <SectionTitle>Popular Categories</SectionTitle>
+      <CategorySection />
       <SectionTitle>Most Viewed</SectionTitle>
       <MostViewed padding={true} margin={true} />
       <SectionTitle>Testimonals</SectionTitle>
