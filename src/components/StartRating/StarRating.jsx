@@ -34,28 +34,30 @@ function StarRating({ rating, width, height, color }) {
             <Star color={color} width={width} height={height} key={uuid()} />
           );
         })}
-      {state.half &&
-        new Array(state.half).fill(0).map((i) => {
-          return (
-            <StarHalf
-              color={color}
-              width={width}
-              height={height}
-              key={uuid()}
-            />
-          );
-        })}
-      {state.empty &&
-        new Array(state.empty).fill(0).map((i) => {
-          return (
-            <StarOutline
-              color={color}
-              width={width}
-              height={height}
-              key={uuid()}
-            />
-          );
-        })}
+      {state.half
+        ? new Array(state.half).fill(0).map((i) => {
+            return (
+              <StarHalf
+                color={color}
+                width={width}
+                height={height}
+                key={uuid()}
+              />
+            );
+          })
+        : null}
+      {state.empty
+        ? new Array(state.empty).fill(0).map((i) => {
+            return (
+              <StarOutline
+                color={color}
+                width={width}
+                height={height}
+                key={uuid()}
+              />
+            );
+          })
+        : null}
     </Wrapper>
   );
 }

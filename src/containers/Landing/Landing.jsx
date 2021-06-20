@@ -9,7 +9,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 // import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
-import { SectionTitle, Anchor } from "./style";
+import { SectionTitle } from "./style";
 import MostViewed from "./component/MostViewed/MostViewed";
 import HeroComponent from "../../components/HeroComponent/HeroComponent";
 import TestimonalSection from "./component/TestimonalSection/TestimonalSection";
@@ -49,10 +49,7 @@ const Landing = (props) => {
       <CategorySection />
       <SectionTitle>Most Viewed</SectionTitle>
       <MostViewed padding={true} margin={true} />
-      <SectionTitle>Testimonals</SectionTitle>
-
-      <TestimonalSection />
-      <Anchor onClick={handleClickOpen}>Show More</Anchor>
+      <TestimonalSection handleClickOpen={handleClickOpen} />
       <Dialog
         open={open}
         onClose={handleClose}
@@ -64,7 +61,7 @@ const Landing = (props) => {
       >
         <DialogTitle id="scroll-dialog-title">Testimonals</DialogTitle>
         <DialogContent dividers>
-          <TestimonalSection padding="10px 10px" />
+          <TestimonalSection padding="10px 10px" isModal />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

@@ -2,18 +2,23 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Skeleton } from "@material-ui/lab";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import {
+  BannerWrapper,
   CatagoryCard,
-  Image,
-  ImageContainer,
+  ImageWrapper,
   SkeletonWrapper,
-  SubTitle,
-  Title,
   Wrapper,
+  InnerWrapper,
+  Text,
+  StyledButton,
+  StyledLink,
+  Banner,
+  Header,
+  BigHeader,
 } from "./style";
 import { fetchPopularCategory } from "./action";
 import { Category } from "../../../WelcomeGuide/PickPreferences/PickPreferences.interface";
-import StyledLink from "../../../../components/StyledLink/StyledLink";
 
 const CategorySection = (props: any) => {
   const { categories, loading } = props;
@@ -32,29 +37,40 @@ const CategorySection = (props: any) => {
 
   return (
     <Wrapper>
-      {loading
-        ? [1, 2, 3, 4, 5, 6, 7, 8].map(() => (
-            <SkeletonWrapper>
-              <Skeleton animation="wave" width="90px" height="90px" />
-              <div>
-                <Skeleton animation="wave" width="200px" height="40px" />
-                <Skeleton animation="wave" width="200px" height="20px" />
-              </div>
-            </SkeletonWrapper>
-          ))
-        : categories.slice(0, 8).map((category: Category) => (
-            <StyledLink to={`/category/${category.title}/${category._id}`}>
-              <CatagoryCard className="active" key={category.title}>
-                <ImageContainer>
-                  <Image src={category.imageUrl ?? ""} />
-                </ImageContainer>
-                <div>
-                  <Title>{category.title}</Title>
-                  <SubTitle>{`${category.placesCount}+ Options`}</SubTitle>
-                </div>
+      <BannerWrapper>
+        <ImageWrapper>
+          <LazyLoadImage
+            alt={
+              categories[0]?.title ??
+              "https://i1.wp.com/angularscript.com/wp-content/uploads/2018/06/Progressively-Loading-Images-With-Blur-Effect-min.png?ssl=1"
+            }
+            src={
+              categories[0]?.imageUrl ??
+              "https://i1.wp.com/angularscript.com/wp-content/uploads/2018/06/Progressively-Loading-Images-With-Blur-Effect-min.png?ssl=1"
+            }
+            width="100%"
+            height="100%"
+            effect="blur"
+          />
+        </ImageWrapper>
+        <Banner>
+          <Header>Search in Popular Categories</Header>
+          <BigHeader>TOURX</BigHeader>
+          <Text>For best experience</Text>
+        </Banner>
+      </BannerWrapper>
+      <InnerWrapper>
+        {loading
+          ? [1, 2, 3, 4, 5, 6, 7, 8].map(() => <SkeletonWrapper />)
+          : categories.slice(1, 9).map((category: Category) => (
+              <CatagoryCard data-bg={category.imageUrl}>
+                <StyledLink to={`/category/${category.title}/${category._id}`}>
+                  <Text>{category.title}</Text>
+                </StyledLink>
               </CatagoryCard>
-            </StyledLink>
-          ))}
+            ))}
+        <StyledButton>View All</StyledButton>
+      </InnerWrapper>
     </Wrapper>
   );
 };

@@ -8,14 +8,17 @@ import { connect } from "react-redux";
 import TestimonalCard from "../../../../components/TestimonalCard/TestimonalCard";
 import { Container } from "./Style";
 import { getTestinomial } from "../CategorySection/action";
+import { Anchor, SectionTitle } from "../../style";
+import { StyledButton } from "../CategorySection/style";
 
 function TestimonalSection(props) {
-  const { padding, testinomials } = props;
+  const { padding, testinomials, handleClickOpen, isModal } = props;
   useEffect(() => {
     props.getTestinomial();
   }, []);
   return (
     <Container padding={padding}>
+      {!isModal ? <SectionTitle>Testimonals</SectionTitle> : null}
       <Grid container direction="row" justify="center" spacing={3}>
         {testinomials.map((item) => {
           return (
@@ -25,6 +28,11 @@ function TestimonalSection(props) {
           );
         })}
       </Grid>
+      {!isModal ? (
+        <Anchor>
+          <StyledButton onClick={handleClickOpen}>Show More</StyledButton>
+        </Anchor>
+      ) : null}
     </Container>
   );
 }
