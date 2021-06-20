@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-boolean-value */
 import React from "react";
@@ -14,6 +15,7 @@ import HeroComponent from "../../components/HeroComponent/HeroComponent";
 import TestimonalSection from "./component/TestimonalSection/TestimonalSection";
 import WelcomeGuide from "../WelcomeGuide/WelcomeGuide";
 import CategorySection from "./component/CategorySection/CategorySection";
+import { getLoggedInUser } from "./component/CategorySection/action";
 
 const Landing = (props) => {
   const { showWelcomeDialog } = props;
@@ -36,6 +38,10 @@ const Landing = (props) => {
       }
     }
   }, [open]);
+
+  React.useEffect(() => {
+    props.getLoggedInUser();
+  }, []);
   return (
     <>
       <HeroComponent />
@@ -75,4 +81,4 @@ const mapStateToProps = (state) => ({
   showWelcomeDialog: state.welcomeGuide.showWelcomeModal,
 });
 
-export default connect(mapStateToProps, {})(Landing);
+export default connect(mapStateToProps, { getLoggedInUser })(Landing);

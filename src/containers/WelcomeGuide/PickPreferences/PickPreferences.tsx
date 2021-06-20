@@ -43,7 +43,7 @@ const PickPreferences = (props: any): JSX.Element => {
 
   const setSelected = (category: Category) => {
     const isExist = selectedCategory.find(
-      (item: Category) => item.id === category.id
+      (item: Category) => item._id === category._id
     );
     if (isExist) return;
     props.updateSelectedCategory(category);
@@ -58,7 +58,7 @@ const PickPreferences = (props: any): JSX.Element => {
       />
       <TagContainer>
         {selectedCategory.map((category: Category) => (
-          <Tag key={category.id}>
+          <Tag key={category._id}>
             {sanitizeString(category.title)}
             <CloseOutline
               height="18px"
@@ -87,13 +87,13 @@ const PickPreferences = (props: any): JSX.Element => {
             <ImageContainer
               className={
                 selectedCategory.filter(
-                  (item: Category) => item.id === category.id
+                  (item: Category) => item._id === category._id
                 ).length
                   ? "active"
                   : ""
               }
             >
-              <Image src={category.img ?? ""} />
+              <Image src={category.imageUrl ?? ""} />
             </ImageContainer>
             <div>
               <Title>{category.title}</Title>

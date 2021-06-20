@@ -1,3 +1,8 @@
 export interface TestinomialProps {
-  data: { review: string; name: string; rating: number; img: string };
+  data: {
+    review: string;
+    authorName: string;
+    rating: number;
+    avatarUrl: string;
+  };
 }

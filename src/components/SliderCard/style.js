@@ -16,7 +16,8 @@ export const Image = styled.img`
 export const IconWrapper = styled.div`
   position: absolute;
   top: 60px;
-  right: 35px;
+  right: 15px;
+  cursor: pointer;
 `;
 
 export const Text = styled.div`

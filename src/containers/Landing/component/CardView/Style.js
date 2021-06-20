@@ -23,7 +23,7 @@ export const Image = styled(CardMedia)`
 `;
 export const Info = styled(CardContent)`
   position: absolute;
-  bottom: 10px;
+  top: 30px;
   @media screen and (max-width: 540px) {
     padding-bottom: 10px !important;
   }
@@ -37,7 +37,7 @@ export const Overlay = styled.div`
   top: 0;
 `;
 export const Title = styled.div`
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 500;
   color: ${(props) => props.theme.colors.white};
   margin-bottom: 5px;
@@ -50,7 +50,6 @@ export const Description = styled.div`
   font-weight: 300;
   letter-spacing: 1.5px;
   color: ${(props) => props.theme.colors.white};
-  margin-bottom: 20px;
   @media screen and (max-width: 540px) {
     margin-bottom: 10px;
   }
@@ -63,7 +62,6 @@ export const Tag = styled.div`
   font-size: 16px;
   font-weight: 500;
   color: ${(props) => props.theme.colors.white};
-  margin-bottom: 5px;
   @media screen and (max-width: 540px) {
     font-size: 12px;
   }

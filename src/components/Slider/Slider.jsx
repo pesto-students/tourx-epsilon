@@ -14,7 +14,7 @@ import { NavWrapper, NavFor, NavBack } from "./Style";
 
 import SliderCard from "../SliderCard/SliderCard";
 
-const HeroSlider = ({ items, setState, activeSlide }) => {
+const HeroSlider = ({ items, setState, activeSlide, addToFavourait, user }) => {
   // const isMobile = useMediaQuery("(max-width:600px)");
   // const desktop = useMediaQuery("(max-width:1400px)");
   // const largeScreens = useMediaQuery("(max-width:1900px)");
@@ -80,6 +80,8 @@ const HeroSlider = ({ items, setState, activeSlide }) => {
               item={item}
               key={item.id}
               active={index === activeSlide ? true : false}
+              addToFavourait={addToFavourait}
+              user={user}
             />
           );
         })}

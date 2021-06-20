@@ -1,35 +1,36 @@
 import {
-  FETCH_POPULAR_CATEGORY,
-  LOADING_START,
-  LOADING_STOP,
+  ADD_TO_FAVOURAIT,
+  GET_LOGGED_IN_USER,
+  GET_TESTINOMIAL,
 } from "../../containers/Landing/component/CategorySection/constant";
 
 const initialState = {
-  popularCategory: [],
-  loading: false,
+  user: {},
+  testinomial: [],
 };
 
 export default (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
-    case FETCH_POPULAR_CATEGORY: {
+    case ADD_TO_FAVOURAIT: {
       return {
         ...state,
-        popularCategory: payload,
+        user: payload,
       };
     }
-    case LOADING_START: {
+    case GET_LOGGED_IN_USER: {
       return {
         ...state,
-        loading: true,
+        user: payload,
       };
     }
-    case LOADING_STOP: {
+    case GET_TESTINOMIAL: {
       return {
         ...state,
-        loading: false,
+        testinomial: payload,
       };
     }
+
     default:
       return {
         ...state,

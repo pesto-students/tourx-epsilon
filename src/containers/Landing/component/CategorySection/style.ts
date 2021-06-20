@@ -5,14 +5,15 @@ export const Wrapper = styled.div`
   padding: 0px 30px;
   margin: 0px 30px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 
   @media screen and (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
   }
   @media screen and (max-width: 540px) {
     grid-template-columns: repeat(1, 1fr);
+    padding: 0px 8px;
+    margin: 0px 8px;
   }
 `;
 
@@ -58,6 +59,18 @@ export const Title = styled.p`
 
 export const SubTitle = styled.p`
   font-size: 14px;
-  margin: 0px;
+  margin: 8px 0px;
   color: #808b96;
+`;
+
+export const SkeletonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  border-radius: 12px;
+  margin: 1rem 1.5rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  display: flex;
 `;

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
@@ -6,6 +7,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-return-assign */
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import Slider from "react-slick";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import "../../../../vendor/Slick/slick-theme.css";
@@ -16,12 +18,20 @@ import {
   ChevronForwardCircleOutline,
 } from "react-ionicons";
 import { Wrapper, Container, InnerWrapper } from "./Style";
+import { getMostViewed } from "../CategorySection/action";
 import CardView from "../CardView/CardView";
+import StyledLink from "../../../../components/StyledLink/StyledLink";
 
-function MostViewed({ margin, padding }) {
+function MostViewed(props) {
   const isMobile = useMediaQuery("(max-width:600px)");
   const isTab = useMediaQuery("(max-width:768px)");
   const isTablet = useMediaQuery("(max-width:1024px)");
+
+  const { margin, padding, mostViewed } = props;
+
+  React.useEffect(() => {
+    props.getMostViewed();
+  }, []);
 
   const [, setState] = useState({
     oldSlide: 0,
@@ -42,8 +52,8 @@ function MostViewed({ margin, padding }) {
     //  afterChange: (current) => setState({ activeSlide: current })
   };
 
-  function SamplePrevArrow(props) {
-    const { onClick, className, style } = props;
+  function SamplePrevArrow(sampleProps) {
+    const { onClick, className, style } = sampleProps;
     return (
       <ChevronBackCircleOutline
         onClick={onClick}
@@ -55,8 +65,8 @@ function MostViewed({ margin, padding }) {
       />
     );
   }
-  function SampleNextArrow(props) {
-    const { onClick, className, style } = props;
+  function SampleNextArrow(nextProps) {
+    const { onClick, className, style } = nextProps;
     return (
       <ChevronForwardCircleOutline
         onClick={onClick}
@@ -72,13 +82,15 @@ function MostViewed({ margin, padding }) {
   return (
     <Wrapper padding={padding} margin={margin}>
       <Slider {...settings} ref={(c) => (slide = c)}>
-        {[0, 2, 0, 0, 0, 0, 0, 0, 0].map((i) => {
+        {mostViewed.map((i) => {
           return (
-            <Container>
-              <InnerWrapper>
-                <CardView />
-              </InnerWrapper>
-            </Container>
+            <StyledLink to={`/places/${i._id}`}>
+              <Container>
+                <InnerWrapper>
+                  <CardView item={i} />
+                </InnerWrapper>
+              </Container>
+            </StyledLink>
           );
         })}
       </Slider>
@@ -86,4 +98,8 @@ function MostViewed({ margin, padding }) {
   );
 }
 
-export default MostViewed;
+const mapStateToProps = (state) => ({
+  mostViewed: state.places.mostViewed,
+});
+
+export default connect(mapStateToProps, { getMostViewed })(MostViewed);

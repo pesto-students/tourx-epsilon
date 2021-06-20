@@ -1,9 +1,10 @@
 export interface Category {
-  id: number;
+  _id: number;
   title: string;
   options: string;
-  img: string;
+  imageUrl: string;
   slug: string;
+  placesCount: number;
 }
 
 export interface Demo {

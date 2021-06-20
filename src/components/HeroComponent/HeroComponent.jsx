@@ -1,16 +1,24 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
+import { connect } from "react-redux";
 import Icon from "@material-ui/core/Icon";
 import { Button, useMediaQuery } from "@material-ui/core";
 import Slider from "../Slider/Slider";
 import { InfoWrapper, Info, Title, Wrapper, Section } from "./Style";
-import data from "../Slider/data";
 import Header from "../Header/Header";
+import {
+  addToFavourait,
+  fetchPopularPlaces,
+} from "../../containers/Landing/component/CategorySection/action";
+import data from "../Slider/data";
 
-const HeroComponent = () => {
+const HeroComponent = (props) => {
   const [state, setState] = useState({ oldSlide: 0, activeSlide: 0 });
+  const [trending, setTrending] = useState(data);
   const [movedBelow, setMovedBelow] = useState(false);
   const isMobile = useMediaQuery("(max-width:600px)");
   const changeNavbarColor = () => {
@@ -21,12 +29,20 @@ const HeroComponent = () => {
     }
   };
 
+  const { places, user } = props;
   useEffect(() => {
+    props.fetchPopularPlaces();
     window.addEventListener("scroll", changeNavbarColor);
     return () => {
       window.removeEventListener("scroll", changeNavbarColor);
     };
   }, []);
+
+  useEffect(() => {
+    if (places.length) {
+      setTrending(places);
+    }
+  }, [places]);
 
   const variants = {
     hidden: {
@@ -56,9 +72,10 @@ const HeroComponent = () => {
       transition: { duration: 0.5, type: "tween" },
     },
   };
+
   return (
     <AnimatePresence>
-      <Section bg={data[state.activeSlide].bg_url}>
+      <Section bg={trending[state.activeSlide].images[1]}>
         {movedBelow ? (
           <Header isTransparent={false} />
         ) : (
@@ -68,13 +85,17 @@ const HeroComponent = () => {
         {/* <Container src={data[state.activeSlide].bg_url} alt="heroImage" /> */}
         <Wrapper>
           <InfoWrapper
-            key={data[state.activeSlide].id}
+            key={trending[state.activeSlide]._id}
             variants={variants}
             initial="hidden"
             animate="show"
           >
-            <Title variants={item}>{data[state.activeSlide].name}</Title>
-            <Info variants={item}>{data[state.activeSlide].description}</Info>
+            <Title variants={item}>
+              {trending[state.activeSlide].subTitle}
+            </Title>
+            <Info variants={item}>
+              {trending[state.activeSlide].description}
+            </Info>
             <Button
               variant="contained"
               color="primary"
@@ -86,8 +107,10 @@ const HeroComponent = () => {
           </InfoWrapper>
           <Slider
             setState={setState}
-            items={data}
+            items={trending}
             activeSlide={state.activeSlide}
+            addToFavourait={props.addToFavourait}
+            user={user}
           />
         </Wrapper>
       </Section>
@@ -95,4 +118,11 @@ const HeroComponent = () => {
   );
 };
 
-export default HeroComponent;
+const mapStateToProps = (state) => ({
+  places: state.places.popularPlaces,
+  user: state.auth.user,
+});
+
+export default connect(mapStateToProps, { fetchPopularPlaces, addToFavourait })(
+  HeroComponent
+);

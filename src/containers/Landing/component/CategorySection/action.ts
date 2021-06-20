@@ -1,80 +1,130 @@
 import { Dispatch } from "redux";
-import { FETCH_POPULAR_CATEGORY } from "./constant";
+import { GET, POST } from "../../../../api";
+import {
+  ADD_TO_FAVOURAIT,
+  FETCH_POPULAR_CATEGORY,
+  FETCH_POPULAR_PLACES,
+  GET_LOGGED_IN_USER,
+  GET_MOST_VIEWED,
+  GET_TESTINOMIAL,
+  LOADING_START,
+  LOADING_STOP,
+} from "./constant";
+import {
+  AUTH_ROUTES,
+  BACKEND_BASE_URL,
+  CATEGORY_ROUTES,
+  PLACE_ROUTES,
+  TESTINOMIALS_ROUTES,
+  USER_ROUTE,
+} from "../../../../api/routes";
+import { getDefaultHeaders } from "../../../../Library/helper";
 
 export const fetchPopularCategory =
   () =>
-  (dispatch: Dispatch): void => {
-    const category = [
-      {
-        id: 1,
-        title: "Hotels",
-        options: "1200",
-        img: "https://images.unsplash.com/photo-1596386461350-326ccb383e9f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aG90ZWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-      },
-      {
-        id: 2,
-        title: "Hospitals",
-        options: "400",
-        img: "https://images.unsplash.com/photo-1543968332-f99478b1ebdc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aG90ZWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-      },
-      {
-        id: 3,
-        title: "Restraunt",
-        options: "200",
-        img: "https://images.unsplash.com/photo-1580835845971-a393b73bf370?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8aG90ZWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-      },
-      {
-        id: 4,
-        title: "Entertainment",
-        options: "1500",
-        img: "https://images.unsplash.com/photo-1574691250077-03a929faece5?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8aG90ZWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-      },
-      {
-        id: 1,
-        title: "Hotels",
-        options: "1200",
-        img: "https://images.unsplash.com/photo-1596386461350-326ccb383e9f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aG90ZWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-      },
-      {
-        id: 2,
-        title: "Hospitals",
-        options: "400",
-        img: "https://images.unsplash.com/photo-1543968332-f99478b1ebdc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aG90ZWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-      },
-      {
-        id: 3,
-        title: "Restraunt",
-        options: "200",
-        img: "https://images.unsplash.com/photo-1580835845971-a393b73bf370?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8aG90ZWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-      },
-      {
-        id: 1,
-        title: "Hotels",
-        options: "1200",
-        img: "https://images.unsplash.com/photo-1596386461350-326ccb383e9f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aG90ZWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-      },
-      {
-        id: 2,
-        title: "Hospitals",
-        options: "400",
-        img: "https://images.unsplash.com/photo-1543968332-f99478b1ebdc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aG90ZWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-      },
-      {
-        id: 3,
-        title: "Restraunt",
-        options: "200",
-        img: "https://images.unsplash.com/photo-1580835845971-a393b73bf370?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8aG90ZWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-      },
-      {
-        id: 4,
-        title: "Entertainment",
-        options: "1500",
-        img: "https://images.unsplash.com/photo-1574691250077-03a929faece5?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8aG90ZWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-      },
-    ];
-
+  async (dispatch: Dispatch): Promise<void> => {
     dispatch({
-      type: FETCH_POPULAR_CATEGORY,
-      payload: category,
+      type: LOADING_START,
     });
+
+    const response = await GET(`${BACKEND_BASE_URL}/${CATEGORY_ROUTES}`);
+
+    if (response.isSuccess) {
+      dispatch({
+        type: FETCH_POPULAR_CATEGORY,
+        payload: response.data,
+      });
+      dispatch({
+        type: LOADING_STOP,
+      });
+    }
   };
+
+export const fetchPopularPlaces = () => async (dispatch: Dispatch) => {
+  const response = await GET(
+    `${BACKEND_BASE_URL}/${PLACE_ROUTES}?catagoryId=60ce140465ad147a5d69ca0e`
+  );
+
+  if (response.isSuccess) {
+    dispatch({
+      type: FETCH_POPULAR_PLACES,
+      payload: response.data,
+    });
+  }
+};
+
+export const addToFavourait =
+  (payload: string) => async (dispatch: Dispatch) => {
+    const response = await POST(
+      `${BACKEND_BASE_URL}/${USER_ROUTE}/favourait`,
+      {
+        id: payload,
+      },
+      getDefaultHeaders()
+    );
+
+    if (response.isSuccess) {
+      dispatch({
+        type: ADD_TO_FAVOURAIT,
+        payload: response.data,
+      });
+    }
+  };
+
+export const getMostViewed = () => async (dispatch: Dispatch) => {
+  dispatch({
+    type: LOADING_START,
+  });
+
+  const response = await GET(
+    `${BACKEND_BASE_URL}/${PLACE_ROUTES}/most-viewed`,
+    {},
+    getDefaultHeaders()
+  );
+
+  if (response.isSuccess) {
+    dispatch({
+      type: GET_MOST_VIEWED,
+      payload: response.data,
+    });
+    dispatch({
+      type: LOADING_STOP,
+    });
+  }
+};
+
+export const getTestinomial = () => async (dispatch: Dispatch) => {
+  dispatch({
+    type: LOADING_START,
+  });
+  const response = await GET(
+    `${BACKEND_BASE_URL}/${TESTINOMIALS_ROUTES}`,
+    {},
+    getDefaultHeaders()
+  );
+
+  if (response.isSuccess) {
+    dispatch({
+      type: GET_TESTINOMIAL,
+      payload: response.data,
+    });
+    dispatch({
+      type: LOADING_STOP,
+    });
+  }
+};
+
+export const getLoggedInUser = () => async (dispatch: Dispatch) => {
+  const response = await GET(
+    `${BACKEND_BASE_URL}/${AUTH_ROUTES}/me`,
+    {},
+    getDefaultHeaders()
+  );
+
+  if (response.isSuccess) {
+    dispatch({
+      type: GET_LOGGED_IN_USER,
+      payload: response.data,
+    });
+  }
+};

@@ -15,3 +15,11 @@ export default (inp: string): string => {
 
   return capitalize(toRet);
 };
+
+export const getDefaultHeaders = () => {
+  const token = localStorage.getItem("AuthToken") || "";
+
+  return {
+    Authorization: `Bearer ${token}`,
+  };
+};

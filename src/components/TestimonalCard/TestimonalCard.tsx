@@ -16,11 +16,16 @@ const TestimonalCard: React.FC<TestinomialProps> = ({ data }): JSX.Element => {
     <Conatiner>
       <SectionLeft>
         <Text>{data.review}</Text>
-        <Name>{data.name}</Name>
-        <StarRating rating={3.5} color="#C0980A" width="15px" height="15px" />
+        <Name>{data.authorName}</Name>
+        <StarRating
+          rating={data.rating}
+          color="#C0980A"
+          width="15px"
+          height="15px"
+        />
       </SectionLeft>
       <SectionRight>
-        <Image src={data.img} alt="avatar_image" />
+        <Image src={data.avatarUrl} alt="avatar_image" />
       </SectionRight>
     </Conatiner>
   );
@@ -29,9 +34,9 @@ const TestimonalCard: React.FC<TestinomialProps> = ({ data }): JSX.Element => {
 TestimonalCard.propTypes = {
   data: PropTypes.shape({
     review: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
+    authorName: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
-    img: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
   }).isRequired,
 };
 
