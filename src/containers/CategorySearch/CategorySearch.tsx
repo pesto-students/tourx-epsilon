@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect } from "react";
 import { connect } from "react-redux";
@@ -11,6 +12,8 @@ import { searchCategory } from "../WelcomeGuide/action";
 import CategoryCard from "../../components/CategoryCard/CategoryCard";
 // import { Category } from "../WelcomeGuide/PickPreferences/PickPreferences.interface";
 import StyledLink from "../../components/StyledLink/StyledLink";
+import { Category } from "../WelcomeGuide/PickPreferences/PickPreferences.interface";
+import NoResult from "../../components/NoResult/NoResult";
 
 const CategorySearch = (props: any): JSX.Element => {
   const {
@@ -23,7 +26,7 @@ const CategorySearch = (props: any): JSX.Element => {
   } = props;
 
   useEffect(() => {
-    props.searchCategory();
+    props.searchCategory("");
   }, []);
 
   const debouncedSave = useCallback(
@@ -50,25 +53,31 @@ const CategorySearch = (props: any): JSX.Element => {
         />
 
         <CategoryContainer>
-          {loading
-            ? Array.from(new Array(6)).map(() => (
-                <Box pt={0.5} style={{ width: "200px", margin: "auto" }}>
-                  <Skeleton style={{ height: "220px" }} />
-                  <Skeleton />
-                  <Skeleton width="60%" />
-                </Box>
-              ))
-            : categories.map((category: any) => (
-                <StyledLink to={`/category/${category.slug}/${category.id}`}>
-                  <CategoryCard
-                    key={category.id}
-                    id={category.id}
-                    title={category.title}
-                    image={category.img}
-                    description={category.options}
-                  />
-                </StyledLink>
-              ))}
+          {loading ? (
+            Array.from(new Array(6)).map(() => (
+              <Box pt={0.5} style={{ width: "200px", margin: "auto" }}>
+                <Skeleton style={{ height: "220px" }} />
+                <Skeleton />
+                <Skeleton width="60%" />
+              </Box>
+            ))
+          ) : categories.length === 0 ? (
+            <NoResult />
+          ) : (
+            categories.map((category: Category) => (
+              <StyledLink
+                to={`/category/${category.title.toLowerCase()}/${category._id}`}
+              >
+                <CategoryCard
+                  key={category._id}
+                  id={category._id}
+                  title={category.title}
+                  image={category.imageUrl}
+                  description={category.placesCount.toString()}
+                />
+              </StyledLink>
+            ))
+          )}
         </CategoryContainer>
       </Body>
     </StyledModal>

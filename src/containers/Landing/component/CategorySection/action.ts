@@ -6,6 +6,7 @@ import {
   FETCH_POPULAR_PLACES,
   GET_LOGGED_IN_USER,
   GET_MOST_VIEWED,
+  GET_SINGLE_CATEGORY,
   GET_TESTINOMIAL,
   LOADING_START,
   LOADING_STOP,
@@ -32,6 +33,25 @@ export const fetchPopularCategory =
     if (response.isSuccess) {
       dispatch({
         type: FETCH_POPULAR_CATEGORY,
+        payload: response.data,
+      });
+      dispatch({
+        type: LOADING_STOP,
+      });
+    }
+  };
+
+export const fetchSingleCategory =
+  (id: string) => async (dispatch: Dispatch) => {
+    dispatch({
+      type: LOADING_START,
+    });
+
+    const response = await GET(`${BACKEND_BASE_URL}/${CATEGORY_ROUTES}/${id}`);
+
+    if (response.isSuccess) {
+      dispatch({
+        type: GET_SINGLE_CATEGORY,
         payload: response.data,
       });
       dispatch({

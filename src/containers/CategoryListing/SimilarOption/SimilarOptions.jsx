@@ -10,24 +10,24 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import Slider from "react-slick";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import "../../../../vendor/Slick/slick-theme.css";
-import "../../../../vendor/Slick/slick.css";
-import "../../../../vendor/Slick/common.css";
+import "../../../vendor/Slick/slick-theme.css";
+import "../../../vendor/Slick/slick.css";
+import "../../../vendor/Slick/common.css";
 import {
   ChevronBackCircleOutline,
   ChevronForwardCircleOutline,
 } from "react-ionicons";
-import { Wrapper, Container, InnerWrapper } from "./Style";
-import { getMostViewed } from "../CategorySection/action";
-import CardView from "../CardView/CardView";
-import StyledLink from "../../../../components/StyledLink/StyledLink";
+import { Wrapper, Container, InnerWrapper, SkeletonWrapper } from "./Style";
+import { getMostViewed } from "../../Landing/component/CategorySection/action";
+import StyledLink from "../../../components/StyledLink/StyledLink";
+import CardView from "../../Landing/component/CardView/CardView";
 
-function MostViewed(props) {
+function SimilarOptions(props) {
   const isMobile = useMediaQuery("(max-width:600px)");
   const isTab = useMediaQuery("(max-width:768px)");
   const isTablet = useMediaQuery("(max-width:1024px)");
 
-  const { margin, padding, mostViewed } = props;
+  const { margin, padding, places, loading } = props;
 
   React.useEffect(() => {
     props.getMostViewed();
@@ -82,24 +82,27 @@ function MostViewed(props) {
   return (
     <Wrapper padding={padding} margin={margin}>
       <Slider {...settings} ref={(c) => (slide = c)}>
-        {mostViewed.map((i) => {
-          return (
-            <StyledLink to={`/places/${i.title}/${i._id}`}>
-              <Container>
-                <InnerWrapper>
-                  <CardView item={i} />
-                </InnerWrapper>
-              </Container>
-            </StyledLink>
-          );
-        })}
+        {loading
+          ? [1, 2, 3, 4, 5, 5].map(() => <SkeletonWrapper height="350px" />)
+          : places.map((i) => {
+              return (
+                <StyledLink to={`/places/${i.title}/${i._id}`}>
+                  <Container>
+                    <InnerWrapper>
+                      <CardView item={i} />
+                    </InnerWrapper>
+                  </Container>
+                </StyledLink>
+              );
+            })}
       </Slider>
     </Wrapper>
   );
 }
 
 const mapStateToProps = (state) => ({
-  mostViewed: state.places.mostViewed,
+  places: state.places.searchedPlaces,
+  loading: state.places.loading,
 });
 
-export default connect(mapStateToProps, { getMostViewed })(MostViewed);
+export default connect(mapStateToProps, { getMostViewed })(SimilarOptions);

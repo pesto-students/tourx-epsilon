@@ -4,9 +4,7 @@ import React from "react";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import { Avatar, Chip, Divider } from "@material-ui/core";
-import FreeBreakfastIcon from "@material-ui/icons/FreeBreakfast";
 import AcUnitIcon from "@material-ui/icons/AcUnit";
-import DriveEtaIcon from "@material-ui/icons/DriveEta";
 import { Rating } from "@material-ui/lab";
 
 import {
@@ -33,43 +31,35 @@ export default function CategoryListingCard({ cardDetails }) {
     <WrapperContainer>
       <Container>
         <ImageContainer>
-          <Image alt="no-img" src={cardDetails.img} />
+          <Image alt="no-img" src={cardDetails.images[0]} />
         </ImageContainer>
         <DetailsContainer>
           <HeaderContainer>
             <div>
-              <HeaderTitle>{cardDetails.title}</HeaderTitle>
-              <SubTitle>{`${cardDetails.options} Star`}</SubTitle>
+              <HeaderTitle>{cardDetails.title.split(",")[0]}</HeaderTitle>
+              <SubTitle>{`${cardDetails.subTitle}`}</SubTitle>
             </div>
             <YouTubeIcon style={{ color: "#999FAA", fontSize: "32px" }} />
           </HeaderContainer>
           <Title>
-            Over 900,000 Hotels Worldwide. Book Now, Pay When You Stay. List
-            Your Property. View Articles. Register Online. Sign Up For Deals.
+            {cardDetails.options.length > 2
+              ? `${cardDetails.description.slice(0, 100)}...`
+              : `${cardDetails.description.slice(0, 150)}...`}
           </Title>
           <CountContainer>
             <VisibilityIcon style={{ color: "#999FAA", fontSize: "16px" }} />
-            <CountView>12345</CountView>
+            <CountView>{cardDetails.views}</CountView>
           </CountContainer>
           <ChipContainer>
-            <Chip
-              size="small"
-              icon={<AcUnitIcon />}
-              onClick={handleClick}
-              label="AC"
-            />
-            <Chip
-              size="small"
-              icon={<DriveEtaIcon color="white" />}
-              onClick={handleClick}
-              label="Parking"
-            />
-            <Chip
-              size="small"
-              icon={<FreeBreakfastIcon />}
-              onClick={handleClick}
-              label="Breakfast"
-            />
+            {cardDetails.options.map((option) => (
+              <Chip
+                size="small"
+                icon={<AcUnitIcon />}
+                onClick={handleClick}
+                label={option.title}
+                style={{ margin: "4px 0px" }}
+              />
+            ))}
           </ChipContainer>
         </DetailsContainer>
         <Divider orientation="vertical" flexItem />

@@ -21,7 +21,7 @@ import { fetchPopularCategory } from "./action";
 import { Category } from "../../../WelcomeGuide/PickPreferences/PickPreferences.interface";
 
 const CategorySection = (props: any) => {
-  const { categories, loading } = props;
+  const { categories, loading, handleClickOpen } = props;
 
   useEffect(() => {
     props.fetchPopularCategory();
@@ -69,7 +69,9 @@ const CategorySection = (props: any) => {
                 </StyledLink>
               </CatagoryCard>
             ))}
-        <StyledButton>View All</StyledButton>
+        <StyledButton type="button" onClick={handleClickOpen}>
+          View All
+        </StyledButton>
       </InnerWrapper>
     </Wrapper>
   );

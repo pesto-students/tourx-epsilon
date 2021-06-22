@@ -1,6 +1,10 @@
 import { Dispatch } from "redux";
 import { GET } from "../../api";
-import { BACKEND_BASE_URL, STATES_ROUTES } from "../../api/routes";
+import {
+  BACKEND_BASE_URL,
+  CATEGORY_ROUTES,
+  STATES_ROUTES,
+} from "../../api/routes";
 import {
   FETCH_CITIES,
   FETCH_STATES,
@@ -78,79 +82,27 @@ export const setCurrentCity = (value: string) => ({
 });
 
 export const searchCategory =
-  () =>
-  (dispatch: Dispatch): void => {
+  (query: string) =>
+  async (dispatch: Dispatch): Promise<void> => {
     dispatch({ type: START_LOADING });
 
-    const category = [
-      {
-        id: 1,
-        title: "Hotels",
-        options: "1200",
-        slug: "hotels",
-        img: "https://images.unsplash.com/photo-1596386461350-326ccb383e9f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aG90ZWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-      },
-      {
-        id: 2,
-        title: "Hospitals",
-        options: "400",
-        slug: "hospitals",
-        img: "https://images.unsplash.com/photo-1543968332-f99478b1ebdc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aG90ZWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-      },
-      {
-        id: 3,
-        title: "Restraunt",
-        options: "200",
-        slug: "restraunt",
-        img: "https://images.unsplash.com/photo-1580835845971-a393b73bf370?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8aG90ZWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-      },
-      {
-        id: 4,
-        title: "Entertainment",
-        options: "1500",
-        slug: "entertainment",
-        img: "https://images.unsplash.com/photo-1574691250077-03a929faece5?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8aG90ZWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-      },
-      {
-        id: 1,
-        title: "Hotels",
-        options: "1200",
-        slug: "hotels",
-        img: "https://images.unsplash.com/photo-1596386461350-326ccb383e9f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aG90ZWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-      },
-      {
-        id: 2,
-        title: "Hospitals",
-        options: "400",
-        slug: "hotels",
-        img: "https://images.unsplash.com/photo-1543968332-f99478b1ebdc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aG90ZWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-      },
-      {
-        id: 3,
-        title: "Restraunt",
-        options: "200",
-        slug: "hotels",
-        img: "https://images.unsplash.com/photo-1580835845971-a393b73bf370?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8aG90ZWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-      },
-      {
-        id: 4,
-        title: "Entertainment",
-        options: "1500",
-        slug: "hotels",
-        img: "https://images.unsplash.com/photo-1574691250077-03a929faece5?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8aG90ZWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-      },
-    ];
+    dispatch({
+      type: START_LOADING,
+    });
 
-    setInterval(() => {
+    const response = await GET(
+      `${BACKEND_BASE_URL}/${CATEGORY_ROUTES}?search=${query}`
+    );
+
+    if (response.isSuccess) {
       dispatch({
         type: SEARCH_CATEGORIES,
-        payload: category,
+        payload: response.data,
       });
       dispatch({
         type: STOP_LOADING,
-        payload: category,
       });
-    }, 1000);
+    }
   };
 
 export const updateSelectedCategory = (category: Category) => ({

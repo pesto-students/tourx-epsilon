@@ -16,10 +16,12 @@ import TestimonalSection from "./component/TestimonalSection/TestimonalSection";
 import WelcomeGuide from "../WelcomeGuide/WelcomeGuide";
 import CategorySection from "./component/CategorySection/CategorySection";
 import { getLoggedInUser } from "./component/CategorySection/action";
+import CategorySearch from "../CategorySearch/CategorySearch";
 
 const Landing = (props) => {
   const { showWelcomeDialog } = props;
   const [open, setOpen] = React.useState(false);
+  const [categoryModalOpen, setCategoryModalOpen] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -46,7 +48,7 @@ const Landing = (props) => {
     <>
       <HeroComponent />
       <SectionTitle>Popular Categories</SectionTitle>
-      <CategorySection />
+      <CategorySection handleClickOpen={() => setCategoryModalOpen(true)} />
       <SectionTitle>Most Viewed</SectionTitle>
       <MostViewed padding={true} margin={true} />
       <TestimonalSection handleClickOpen={handleClickOpen} />
@@ -70,6 +72,12 @@ const Landing = (props) => {
         </DialogActions>
       </Dialog>
       {showWelcomeDialog ? <WelcomeGuide /> : null}
+      <CategorySearch
+        open={categoryModalOpen}
+        onClose={() => setCategoryModalOpen(false)}
+        ariaDescribedby="Category Search"
+        ariaLabelledby="Category Search Modal"
+      />
     </>
   );
 };

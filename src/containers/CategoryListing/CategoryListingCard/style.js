@@ -8,7 +8,7 @@ export const WrapperContainer = styled.div`
 
 export const Container = styled.div`
   width: 100%;
-  height: 250px;
+  height: 280px;
   background: #f2f4f8;
   border-radius: 10px;
   display: flex;
@@ -55,6 +55,9 @@ export const ImageContainer = styled.div`
 export const DetailsContainer = styled.div`
   width: 45%;
   padding: 0rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   @media screen and (max-width: 1024px) {
     width: 50%;
   }
@@ -129,5 +132,6 @@ export const ReviewText = styled.span`
 
 export const ChipContainer = styled.div`
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  justify-content: space-between;
 `;

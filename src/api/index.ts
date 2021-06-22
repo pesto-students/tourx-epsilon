@@ -11,6 +11,7 @@ export const GET = async (
       headers,
     });
     const dataToReturn = {
+      ...response.data,
       isSuccess: true,
       data: response?.data?.data,
       status: response.status,
@@ -38,6 +39,7 @@ export const POST = async (
 
     const response = await apiProvider.post(url, body, meta);
     const dataToReturn = {
+      ...response.data,
       isSuccess: true,
       data: response?.data?.data,
     };

@@ -7,7 +7,7 @@ export const CategoryBanner = styled.div`
   width: 100vw;
   overflow: hidden;
   height: 550px;
-  background-image: url(${banner});
+  background-image: url("${(props: any) => props["data-bg"] ?? banner}");
   background-size: contain;
   background-attachment: fixed;
   margin-top: 80px;
@@ -45,6 +45,9 @@ export const CategorySeach = styled.div`
   top: 80px; /* required */
   background: white;
   z-index: 10;
+  @media screen and (max-width: 540px) {
+    top: 65px;
+  }
 `;
 
 export const ScrollDiv = styled.div`
@@ -167,5 +170,23 @@ export const Body = styled.div`
   }
   @media screen and (max-width: 320px) {
     bottom: -100px;
+  }
+`;
+
+export const SkeletonWrapper = styled.div`
+  width: 100%;
+  height: 280px;
+  background: #f2f4f8;
+  border-radius: 10px;
+  display: flex;
+  padding: 1rem;
+  background: #eaecee;
+  margin: 1rem 0rem;
+  @media screen and (max-width: 1024px) {
+    //code
+  }
+  @media screen and (max-width: 767px) {
+    flex-wrap: wrap;
+    height: auto;
   }
 `;

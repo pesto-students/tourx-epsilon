@@ -15,7 +15,11 @@ const Routes = () => {
     <React.Suspense fallback={<Loader />}>
       <Switch>
         <Route exact path="/" component={Landing} />
-        <Route exact path="/places/:place_id" component={DetailsPage} />
+        <Route
+          exact
+          path="/places/:place_name/:place_id"
+          component={DetailsPage}
+        />
         <Route
           exact
           path="/category/:ct_name/:ct_id"

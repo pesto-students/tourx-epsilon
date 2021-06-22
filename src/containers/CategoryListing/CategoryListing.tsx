@@ -1,3 +1,6 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/prop-types */
 import {
   Fab,
   FormControl,
@@ -5,11 +8,14 @@ import {
   MenuItem,
   Select,
 } from "@material-ui/core";
-import { Pagination } from "@material-ui/lab";
+import { Pagination, Skeleton } from "@material-ui/lab";
+import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
+import { debounce } from "lodash";
 import FilterListIcon from "@material-ui/icons/FilterList";
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import Input from "../../components/Input/Input";
-// import StyledLink from "../../components/StyledLink/StyledLink";
+import StyledLink from "../../components/StyledLink/StyledLink";
 import {
   CategoryBanner,
   CategorySeach,
@@ -18,7 +24,6 @@ import {
   Container,
   FilterContainer,
   Tag,
-  // CategoryContainer,
   ListingSection,
   DisplaySection,
   FilterSection,
@@ -26,14 +31,19 @@ import {
   PaginationContainer,
   StyledModal,
   Body,
+  SkeletonWrapper,
 } from "./style";
 import NavHeader from "../../components/Header/Header";
-// import CategoryCard from "../../components/CategoryCard/CategoryCard";
-// import { Category } from "../WelcomeGuide/PickPreferences/PickPreferences.interface";
+
 import CategoryListingCard from "./CategoryListingCard/CategoryListingCard";
 import FilterCard from "./FilterCard/FIlterCard";
 import OptionCard from "./OptionsCard/OptionCard";
 import useGenericState from "../../Library/useGenericState";
+import { RootState } from "../../redux/index.interface";
+import { fetchPlaces, filterPlaces } from "./action";
+import NoResult from "../../components/NoResult/NoResult";
+import { fetchSingleCategory } from "../Landing/component/CategorySection/action";
+import SimilarOptions from "./SimilarOption/SimilarOptions";
 
 const listing = [
   {
@@ -58,66 +68,114 @@ const listing = [
   },
 ];
 
-const categories = [
-  {
-    id: 1,
-    title: "Hotels",
-    options: "1200",
-    slug: "hotels",
-    img: "https://images.unsplash.com/photo-1596386461350-326ccb383e9f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aG90ZWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-  },
-  {
-    id: 2,
-    title: "Hospitals",
-    options: "400",
-    slug: "hospitals",
-    img: "https://images.unsplash.com/photo-1543968332-f99478b1ebdc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aG90ZWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-  },
-  {
-    id: 3,
-    title: "Restraunt",
-    options: "200",
-    slug: "restraunt",
-    img: "https://images.unsplash.com/photo-1580835845971-a393b73bf370?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8aG90ZWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-  },
-  {
-    id: 3,
-    title: "Restraunt",
-    options: "200",
-    slug: "restraunt",
-    img: "https://images.unsplash.com/photo-1580835845971-a393b73bf370?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8aG90ZWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-  },
-  {
-    id: 3,
-    title: "Restraunt",
-    options: "200",
-    slug: "restraunt",
-    img: "https://images.unsplash.com/photo-1580835845971-a393b73bf370?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8aG90ZWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-  },
-];
+interface RouteParams {
+  ct_id: string;
+}
 
-const CategoryListing: React.FC = () => {
+interface ListingProps {
+  fetchPlaces: (
+    categoryId: string,
+    stateId: string,
+    limit?: number,
+    page?: number,
+    search?: string
+  ) => void;
+  places: [];
+  loading: boolean;
+  pagination: any;
+  totalPages: number;
+  filters: [];
+  fetchSingleCategory: (categoryId: string) => void;
+  activeCategory: any;
+  filterPlaces: (categoryId: string, stateId: string, filters: any) => void;
+}
+
+const CategoryListing: React.FC<ListingProps> = (props) => {
+  const { places, loading, pagination, totalPages, filters, activeCategory } =
+    props;
+
   const [state, setState] = useGenericState({
     query: "",
     showFilterModal: false,
+    filterState: [],
   });
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setState({ query: event.target.value as string });
+  const params: RouteParams = useParams();
+
+  const { showFilterModal, query, filterState } = state;
+
+  const debouncedSave = useCallback(
+    debounce(
+      (value) =>
+        props.fetchPlaces(
+          params.ct_id,
+          "60c5a49cb2f275a866877bba",
+          5,
+          1,
+          value
+        ),
+      300
+    ),
+    []
+  );
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    debouncedSave(event?.target?.value ?? "");
   };
 
-  const { showFilterModal, query } = state;
+  useEffect(() => {
+    props.fetchPlaces(params.ct_id, "60c5a49cb2f275a866877bba");
+    props.fetchSingleCategory(params.ct_id);
+  }, []);
+
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    props.fetchPlaces(
+      params.ct_id,
+      "60c5a49cb2f275a866877bba",
+      pagination?.next?.limit ?? 5,
+      pagination?.next?.page ?? value
+    );
+  };
+
+  const handleFilterChange = (checked: boolean, filter: any) => {
+    let filtersData: any = [];
+    if (checked) {
+      filtersData = [...state.filterState, filter];
+    } else {
+      filtersData = [...state.filterState];
+      filtersData.forEach((item: any, index: any) => {
+        if (item.id === filter.id) {
+          filtersData.splice(index, 1);
+        }
+      });
+    }
+    setState({
+      filterState: filtersData,
+    });
+  };
+
+  useEffect(() => {
+    if (!filterState.length) {
+      props.fetchPlaces(params.ct_id, "60c5a49cb2f275a866877bba");
+    } else {
+      props.filterPlaces(params.ct_id, "60c5a49cb2f275a866877bba", filterState);
+    }
+  }, [filterState]);
 
   return (
     <div style={{ position: "relative" }}>
       <NavHeader isTransparent={false} elevation="none" />
-      <CategoryBanner />
+      <CategoryBanner data-bg={activeCategory.banner} />
       <Container>
         <Header>Best Options on Hotels</Header>
         <CategorySeach>
           <Input
             placeholder="Search Options In Hotels"
             icon="https://cdn0.iconfinder.com/data/icons/very-basic-2-android-l-lollipop-icon-pack/24/search-512.png"
+            onChange={handleSearch}
           />
 
           <FilterContainer>
@@ -129,7 +187,6 @@ const CategoryListing: React.FC = () => {
                 labelId="demo-simple-select-outlined-label"
                 id="demo-simple-select-outlined"
                 value={query}
-                onChange={handleChange}
                 label="Sort By"
                 style={{ padding: "4px" }}
               >
@@ -147,40 +204,83 @@ const CategoryListing: React.FC = () => {
           <ListingSection>
             <FilterSection>
               <FilterCard />
-              <OptionCard />
+              <OptionCard filters={filters} onChange={handleFilterChange} />
             </FilterSection>
             <DisplaySection>
-              {categories.map((item) => (
-                <CategoryListingCard cardDetails={item} />
-              ))}
+              {loading ? (
+                [1, 2, 3, 4, 5].map(() => (
+                  <SkeletonWrapper>
+                    <Skeleton
+                      style={{ borderRadius: "12px" }}
+                      variant="rect"
+                      width="35%"
+                      animation="wave"
+                      height="100%"
+                    />
+                    <div
+                      style={{
+                        width: "100%",
+                        marginLeft: "12px",
+                        display: "flex",
+                        justifyContent: "space-around",
+                        flexDirection: "column",
+                      }}
+                    >
+                      <Skeleton
+                        style={{ borderRadius: "12px" }}
+                        variant="rect"
+                        width="100%"
+                        height="10%"
+                        animation="wave"
+                      />
+                      <Skeleton
+                        style={{ borderRadius: "12px" }}
+                        variant="rect"
+                        width="100%"
+                        height="30%"
+                        animation="wave"
+                      />
+                      <Skeleton
+                        style={{ borderRadius: "12px" }}
+                        variant="rect"
+                        width="100%"
+                        height="10%"
+                        animation="wave"
+                      />
+                    </div>
+                    <div style={{ width: "33%", marginLeft: "12px" }}>
+                      <Skeleton
+                        style={{ borderRadius: "12px" }}
+                        variant="rect"
+                        width="100%"
+                        height="100%"
+                        animation="wave"
+                      />
+                    </div>
+                  </SkeletonWrapper>
+                ))
+              ) : places.length ? (
+                places.map((item: any) => (
+                  <StyledLink to={`/places/${item.title}/${item._id}`}>
+                    <CategoryListingCard cardDetails={item} />
+                  </StyledLink>
+                ))
+              ) : (
+                <NoResult />
+              )}
             </DisplaySection>
           </ListingSection>
         </ScrollDiv>
         <PaginationContainer>
-          <Pagination count={10} variant="outlined" shape="rounded" />
+          <Pagination
+            count={totalPages ?? 0}
+            variant="outlined"
+            shape="rounded"
+            onChange={handlePageChange}
+          />
         </PaginationContainer>
         <HeaderTitle>Similar Options Available</HeaderTitle>
-        {/* <CategoryContainer>
-          {loading
-            ? Array.from(new Array(6)).map((item) => (
-                <Box pt={0.5} style={{ width: "200px", margin: "auto" }}>
-                  <Skeleton style={{ height: "220px" }} />
-                  <Skeleton />
-                  <Skeleton width="60%" />
-                </Box>
-              ))
-            : categories.map((category: Category) => (
-                <StyledLink to={`/category/${category.slug}/${category.id}`}>
-                  <CategoryCard
-                    key={category.id}
-                    id={category.id}
-                    title={category.title}
-                    image={category.img}
-                    description={category.options}
-                  />
-                </StyledLink>
-              ))}
-        </CategoryContainer> */}
+        <SimilarOptions />
       </Container>
       <Fab
         aria-label="Filter Button"
@@ -200,7 +300,7 @@ const CategoryListing: React.FC = () => {
         <Body>
           <FilterSection data-display="block">
             <FilterCard />
-            <OptionCard />
+            <OptionCard filters={filters} onChange={handleFilterChange} />
           </FilterSection>
         </Body>
       </StyledModal>
@@ -208,4 +308,17 @@ const CategoryListing: React.FC = () => {
   );
 };
 
-export default CategoryListing;
+const mapStateToProps = (state: RootState) => ({
+  places: state.places.searchedPlaces,
+  loading: state.places.loading,
+  pagination: state.places.pagination,
+  totalPages: state.places.totalPages,
+  filters: state.places.filters,
+  activeCategory: state.category.activeCategory,
+});
+
+export default connect(mapStateToProps, {
+  fetchPlaces,
+  fetchSingleCategory,
+  filterPlaces,
+})(CategoryListing);

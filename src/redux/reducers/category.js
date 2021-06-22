@@ -1,5 +1,6 @@
 import {
   FETCH_POPULAR_CATEGORY,
+  GET_SINGLE_CATEGORY,
   LOADING_START,
   LOADING_STOP,
 } from "../../containers/Landing/component/CategorySection/constant";
@@ -7,6 +8,7 @@ import {
 const initialState = {
   popularCategory: [],
   loading: false,
+  activeCategory: {},
 };
 
 export default (state = initialState, action) => {
@@ -28,6 +30,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+      };
+    }
+    case GET_SINGLE_CATEGORY: {
+      return {
+        ...state,
+        activeCategory: payload,
       };
     }
     default:
