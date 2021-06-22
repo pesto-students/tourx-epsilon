@@ -30,7 +30,7 @@ export const Container = styled.div`
     padding: 2rem 2rem;
   }
   @media screen and (max-width: 768px) {
-    padding: 2rem 1rem;
+    padding: 2rem 2rem;
   }
 `;
 export const CategorySeach = styled.div`

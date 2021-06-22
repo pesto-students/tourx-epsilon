@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import Footer from "./components/Footer/Footer";
 import Loader from "./components/Loader/Loader";
 
 const Landing = React.lazy(() => import("./containers/Landing/Landing"));
@@ -26,6 +27,7 @@ const Routes = () => {
           component={CategoryListing}
         />
       </Switch>
+      <Footer />
     </React.Suspense>
   );
 };

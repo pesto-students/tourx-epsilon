@@ -9,6 +9,7 @@ body {
     color: ${({ theme }) => theme.colors.text};
     font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
+    overflow-x: hidden;
     a:link{
       text-decoration: none;
     }
