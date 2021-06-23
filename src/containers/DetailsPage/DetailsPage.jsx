@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+/* eslint-disable react/prop-types */
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import Lightbox from "react-image-lightbox";
 import { Grid } from "@material-ui/core";
+import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
+import { Rating } from "@material-ui/lab";
 import { LocationOnRounded, Favorite } from "@material-ui/icons";
-
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Header from "../../components/Header/Header";
 import MostViewed from "../Landing/component/MostViewed/MostViewed";
@@ -25,130 +29,129 @@ import {
   Wrapper,
   ReviewSection,
 } from "./Style";
-import data from "../../components/ImageGallery/data";
+import { addReview, fetchPlaceDetails, fetchReviews } from "./action";
 
-const DetailsPage = () => {
+const DetailsPage = (props) => {
   const [state, setState] = useState({
     isOpen: false,
     index: 0,
   });
+
+  const [rating, setRating] = useState(0);
+
+  const params = useParams();
+
+  const { activePlace, loading, isAuth, user } = props;
+
+  useEffect(() => {
+    props.fetchPlaceDetails(params.place_id);
+    props.fetchReviews();
+  }, [params.place_id]);
+
+  const handleAddReview = (text) => {
+    props.fetchPlaceDetails(params.place_id);
+    props.addReview(params.place_id, text, rating, user._id);
+    setRating(0);
+  };
+
   const isMobile = useMediaQuery("(max-width:600px)");
   return (
     <>
       {!state.isOpen && <Header isTransparent={false} />}
-      <ImageGallery setState={setState} />
-      <PageWrapper>
-        <InfoContainer>
-          <HeaderContainer>
-            <Title>Leh Ladakh Bike Trip from Delhi</Title>
-            <Location>
-              <LocationOnRounded
-                style={{ fontSize: isMobile ? "15px" : "20px" }}
-              />
-              Kerela
-            </Location>
-          </HeaderContainer>
-          <ReviewsContainer>
-            <Reviews>789 Reviews</Reviews>
-            <Ratings>
-              <Favorite
-                color="red"
-                style={{
-                  fontSize: isMobile ? "22px" : "22px",
-                  colo: "red",
-                  marginRight: "5px",
-                }}
-              />
-              89
-            </Ratings>
-          </ReviewsContainer>
-          <div>
-            <OverviewTitle>Overview</OverviewTitle>
-            <OverviewDesc>
-              Have the experience of a lifetime, and get to ride your bikes on
-              the most thrilling and adventurous routes of India. Ride your bike
-              via beautiful valleys in Himachal, to the most thrilling routes of
-              Ladakh. Starting from Delhi, this tour takes you to amazing
-              destinations like Manali, Jispa, Sarchu, Leh, and many more. Drive
-              through the highest motorable passes while enjoying the beauty of
-              snow-capped mountains, lakes, amazing experiences, and much more.
-              Ride all the way from Manali to Leh and experience the mix of the
-              craziest adventures in the World!...
-            </OverviewDesc>
-          </div>
-          <div>
-            <OverviewTitle>Highlights</OverviewTitle>
-            <Wrapper>
-              <HighLightIcon color="#59A5FF" width="25px" height="25px" />
-              <HighlightsDesc>
-                A perfect blend of adventurous, thrilling and cultural
-                experiences, handpicked by Thrillophilia’s outdoor experts
-              </HighlightsDesc>
-            </Wrapper>
-
-            <Wrapper>
-              <HighLightIcon color="#59A5FF" width="25px" height="25px" />
-              <HighlightsDesc>
-                A perfect blend of adventurous, thrilling and cultural
-                experiences, handpicked by Thrillophilia’s outdoor experts A
-                perfect blend of adventurous, thrilling and cultural
-                experiences, handpicked by Thrillophilia’s outdoor experts
-              </HighlightsDesc>
-            </Wrapper>
-
-            <Wrapper>
-              <HighLightIcon color="#59A5FF" width="25px" height="25px" />
-              <HighlightsDesc>
-                A perfect blend of adventurous, thrilling and cultural
-                experiences, handpicked by Thrillophilia’s outdoor experts
-              </HighlightsDesc>
-            </Wrapper>
-          </div>
-        </InfoContainer>
-        <OverviewTitle>Similar Spots</OverviewTitle>
-        <MostViewed padding={false} margin={false} />
-        <OverviewTitle>Reviews</OverviewTitle>
-        <ReviewSection>
-          <Grid container spacing={3}>
-            <Grid item xs={12} lg={4} md={6} sm={12}>
-              <ReviewsCard />
+      {!loading ? (
+        <ImageGallery
+          data={activePlace?.images?.slice(0, 5) || []}
+          setState={setState}
+        />
+      ) : null}
+      {!loading ? (
+        <PageWrapper>
+          <InfoContainer>
+            <HeaderContainer>
+              <Title>{activePlace?.title}</Title>
+              <Location>
+                <LocationOnRounded
+                  style={{ fontSize: isMobile ? "15px" : "20px" }}
+                />
+                Kerela
+              </Location>
+            </HeaderContainer>
+            <ReviewsContainer>
+              <Reviews>{activePlace?.totalReviews} Reviews</Reviews>
+              <Ratings>
+                <Favorite
+                  color="red"
+                  style={{
+                    fontSize: isMobile ? "22px" : "22px",
+                    colo: "red",
+                    marginRight: "5px",
+                  }}
+                />
+                {activePlace?.favourait}
+              </Ratings>
+            </ReviewsContainer>
+            <div>
+              <OverviewTitle>Overview</OverviewTitle>
+              <OverviewDesc>{activePlace?.description}</OverviewDesc>
+            </div>
+            <div>
+              <OverviewTitle>Highlights</OverviewTitle>
+              {activePlace?.highlights?.map((item) => (
+                <Wrapper>
+                  <HighLightIcon color="#59A5FF" width="25px" height="25px" />
+                  <HighlightsDesc>{item}</HighlightsDesc>
+                </Wrapper>
+              ))}
+            </div>
+          </InfoContainer>
+          <OverviewTitle>Similar Spots</OverviewTitle>
+          <MostViewed padding={false} margin={false} />
+          <OverviewTitle>Reviews</OverviewTitle>
+          <ReviewSection>
+            <Grid container spacing={3}>
+              {activePlace?.reviews?.slice(0, 6).map((review) => (
+                <Grid item xs={12} lg={4} md={6} sm={12}>
+                  <ReviewsCard review={review} />
+                </Grid>
+              ))}
             </Grid>
-            <Grid item xs={12} lg={4} md={6} sm={12}>
-              <ReviewsCard />
-            </Grid>
-            <Grid item xs={12} lg={4} md={6} sm={12}>
-              <ReviewsCard />
-            </Grid>
-            <Grid item xs={12} lg={4} md={6} sm={12}>
-              <ReviewsCard />
-            </Grid>
-            <Grid item xs={12} lg={4} md={4} sm={6}>
-              <ReviewsCard />
-            </Grid>
-            <Grid item xs={12} lg={4} md={4} sm={6}>
-              <ReviewsCard />
-            </Grid>
-          </Grid>
-        </ReviewSection>
-        <OverviewTitle>Write Review</OverviewTitle>
-        <CommentBox />
-      </PageWrapper>
+          </ReviewSection>
+          <OverviewTitle>Write Review</OverviewTitle>
+          <Rating
+            name="simple-controlled"
+            value={rating}
+            onChange={(event, newValue) => {
+              setRating(newValue);
+            }}
+          />
+          <CommentBox isAuth={isAuth} handleAddReview={handleAddReview} />
+        </PageWrapper>
+      ) : null}
       {state.isOpen && (
         <Lightbox
-          mainSrc={data[state.index]}
-          nextSrc={data[(state.index + 1) % data.length]}
-          prevSrc={data[(state.index + data.length - 1) % data.length]}
+          mainSrc={activePlace?.images[state.index]}
+          nextSrc={
+            activePlace?.images[(state.index + 1) % activePlace.images.length]
+          }
+          prevSrc={
+            activePlace.images[
+              (state.index + activePlace?.images?.length - 1) %
+                activePlace?.images?.length
+            ]
+          }
           onCloseRequest={() => setState({ isOpen: false, index: 0 })}
           onMovePrevRequest={() =>
             setState({
               ...state,
-              index: (state.index + data.length - 1) % data.length,
+              index:
+                (state.index + activePlace?.images?.length - 1) %
+                activePlace?.images?.length,
             })
           }
           onMoveNextRequest={() =>
             setState({
               ...state,
-              index: (state.index + 1) % data.length,
+              index: (state.index + 1) % activePlace.images.length,
             })
           }
         />
@@ -157,4 +160,16 @@ const DetailsPage = () => {
   );
 };
 
-export default DetailsPage;
+const mapStateToProps = (state) => ({
+  activePlace: state.places.activePlace,
+  loading: state.places.loading,
+  reviews: state.places.reviews,
+  isAuth: state.auth.isAuth,
+  user: state.auth.user,
+});
+
+export default connect(mapStateToProps, {
+  fetchPlaceDetails,
+  fetchReviews,
+  addReview,
+})(DetailsPage);

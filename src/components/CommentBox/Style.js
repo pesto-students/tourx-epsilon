@@ -5,7 +5,7 @@ export const TextAreaSection = styled(TextareaAutosize)`
   border: none;
   overflow: auto;
   outline: none;
-  width: auto;
+  width: 100%;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -25,4 +25,10 @@ export const ActionSection = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  cursor: pointer;
+`;
+
+export const ErrorSpan = styled.div`
+  font-size: 18px;
+  color: red;
 `;

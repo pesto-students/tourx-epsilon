@@ -1,7 +1,11 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
 import Footer from "./components/Footer/Footer";
 import Loader from "./components/Loader/Loader";
+import { RootState } from "./redux/index.interface";
+import { authenticateUser, setIsAuth } from "./redux/commonActions/auth";
 
 const Landing = React.lazy(() => import("./containers/Landing/Landing"));
 const DetailsPage = React.lazy(
@@ -11,7 +15,15 @@ const CategoryListing = React.lazy(
   () => import("./containers/CategoryListing/CategoryListing")
 );
 
-const Routes = () => {
+const Routes = (props: any) => {
+  useEffect(() => {
+    const token = localStorage.getItem("AuthToken");
+    if (token) {
+      props.authenticateUser(token);
+    } else {
+      props.setIsAuth(false);
+    }
+  }, []);
   return (
     <React.Suspense fallback={<Loader />}>
       <Switch>
@@ -32,4 +44,11 @@ const Routes = () => {
   );
 };
 
-export default Routes;
+export const mapStateToProps = (state: RootState) => ({
+  isAuth: state.auth.isAuth,
+  user: state.auth.token,
+});
+
+export default connect(mapStateToProps, { authenticateUser, setIsAuth })(
+  Routes
+);

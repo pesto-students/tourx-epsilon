@@ -8,6 +8,10 @@ import {
   SET_TOTAL_PAGES,
 } from "../../containers/CategoryListing/constant";
 import {
+  FETCH_REVIEW,
+  FETCH_SINGLE_PLACE_DETAIL,
+} from "../../containers/DetailsPage/constant";
+import {
   FETCH_POPULAR_PLACES,
   GET_MOST_VIEWED,
 } from "../../containers/Landing/component/CategorySection/constant";
@@ -20,6 +24,8 @@ const initialState = {
   pagination: {},
   totalPages: 3,
   filters: [],
+  activePlace: {},
+  reviews: [],
 };
 
 export default (state = initialState, action) => {
@@ -77,6 +83,18 @@ export default (state = initialState, action) => {
       return {
         ...state,
         searchedPlaces: payload,
+      };
+    }
+    case FETCH_SINGLE_PLACE_DETAIL: {
+      return {
+        ...state,
+        activePlace: payload,
+      };
+    }
+    case FETCH_REVIEW: {
+      return {
+        ...state,
+        reviews: payload,
       };
     }
     default:

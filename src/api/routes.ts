@@ -6,3 +6,4 @@ export const PLACE_ROUTES = "api/v1/places";
 export const USER_ROUTE = "api/v1/users/";
 export const CATEGORY_ROUTES = "api/v1/categories";
 export const TESTINOMIALS_ROUTES = "api/v1/testinomial";
+export const REVIEW_ROUTES = "api/v1/reviews";

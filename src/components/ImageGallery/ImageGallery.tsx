@@ -3,7 +3,6 @@
 import React from "react";
 import { uuid } from "uuidv4";
 import { useMediaQuery } from "@material-ui/core";
-import data from "./data";
 import {
   Container,
   LeftImage,
@@ -19,7 +18,7 @@ import {
 } from "./Style";
 // import ImageGalleryProps from "./ImageGallery.interface";
 
-const ImageGallery = ({ setState }: any) => {
+const ImageGallery = ({ setState, data }: any) => {
   const isMobile = useMediaQuery("(max-width:600px)");
   return (
     <>
@@ -27,7 +26,10 @@ const ImageGallery = ({ setState }: any) => {
         <Container>
           <LeftImage>
             <ImageItem
-              src={data[0]}
+              src={
+                data[0] ??
+                "https://i1.wp.com/angularscript.com/wp-content/uploads/2018/06/Progressively-Loading-Images-With-Blur-Effect-min.png?ssl=1"
+              }
               alt="featured image"
               onClick={() => {
                 setState({
@@ -38,11 +40,14 @@ const ImageGallery = ({ setState }: any) => {
             />
           </LeftImage>
           <SubGrid>
-            {data.slice(1).map((i, index) => {
+            {data.slice(1).map((i: string, index: number) => {
               return (
                 <SubItem>
                   <SubItemImg
-                    src={i}
+                    src={
+                      i ??
+                      "https://i1.wp.com/angularscript.com/wp-content/uploads/2018/06/Progressively-Loading-Images-With-Blur-Effect-min.png?ssl=1"
+                    }
                     alt="grid image"
                     key={uuid()}
                     onClick={() => {

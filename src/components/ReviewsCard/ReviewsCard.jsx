@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import StarRating from "../StartRating/StarRating";
 import {
@@ -15,17 +16,18 @@ import {
   RatingWrapper,
 } from "./Style";
 
-function ReviewsCard() {
+function ReviewsCard(props) {
+  const { review } = props;
   return (
     <ReviewCardWrap>
       <Wrapper>
         <TopSection>
-          <Date>25 May 2021</Date>
+          <Date>{review?.createdAt?.split("T")[0]}</Date>
           <RatingWrap>
             <Rating>Excellent</Rating>
             <RatingWrapper>
               <StarRating
-                rating={3.5}
+                rating={review?.rating ?? 5}
                 color="#C0980A"
                 width="20px"
                 height="20px"
@@ -40,14 +42,10 @@ function ReviewsCard() {
               alt="imgProfile"
             />
           </ImageWarp>
-          <Deatils>Marut Butt</Deatils>
+          <Deatils>{review?.user?.email?.split("@")[0]}</Deatils>
         </UserDetail>
         <div>
-          <ReviewsSection>
-            Highly recommended! I booked for my stays at the Serai Resort and I
-            can proudly say that my stays were worth the money. Thrillophilia
-            helped
-          </ReviewsSection>
+          <ReviewsSection>{review?.description}</ReviewsSection>
         </div>
       </Wrapper>
     </ReviewCardWrap>

@@ -3,10 +3,13 @@ import {
   GET_LOGGED_IN_USER,
   GET_TESTINOMIAL,
 } from "../../containers/Landing/component/CategorySection/constant";
+import { SET_ISAUTH } from "../constant/constant";
 
 const initialState = {
   user: {},
   testinomial: [],
+  token: localStorage.getItem("AuthToken"),
+  isAuth: false,
 };
 
 export default (state = initialState, action) => {
@@ -30,7 +33,12 @@ export default (state = initialState, action) => {
         testinomial: payload,
       };
     }
-
+    case SET_ISAUTH: {
+      return {
+        ...state,
+        isAuth: payload,
+      };
+    }
     default:
       return {
         ...state,
