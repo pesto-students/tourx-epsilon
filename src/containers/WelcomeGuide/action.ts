@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import { toast } from "react-toastify";
 import { Dispatch } from "redux";
 import { GET, POST } from "../../api";
@@ -105,7 +106,11 @@ export const signupUser =
       preferences,
     });
     if (response.isSuccess) {
+      localStorage.setItem("AuthToken", response.token);
       toast.success("Registered Succesfully");
+
+      location.href = "/";
+
       dispatch({
         type: SET_SHOW_WELCOME_MODAL,
         payload: false,

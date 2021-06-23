@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Snackbar } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import WarningIcon from "@material-ui/icons/Warning";
 import { connect } from "react-redux";
 import Button from "../../../components/Button/Button";
@@ -38,7 +40,14 @@ const Signup = (props: any): JSX.Element => {
     confirmPassword,
   } = state;
 
-  const { selectedCategories } = props;
+  const { selectedCategories, isAuth } = props;
+  const history = useHistory();
+
+  useEffect(() => {
+    if (isAuth) {
+      history.push("/");
+    }
+  }, [isAuth]);
 
   const handleSignup = () => {
     if (username === "" || password === "" || confirmPassword === "") {
@@ -140,6 +149,7 @@ const Signup = (props: any): JSX.Element => {
 
 const mapStateToProps = (state: any) => ({
   selectedCategories: state.welcomeGuide.selectedCategory,
+  isAuth: state.auth.isAuth,
 });
 
 export default connect(mapStateToProps, {
