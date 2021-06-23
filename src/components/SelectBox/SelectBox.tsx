@@ -3,10 +3,10 @@
 import React, { useEffect } from "react";
 import useGenericState from "../../Library/useGenericState";
 import { OptionProps, SelectBoxProps } from "./SelectBox.interface";
-import { Input, Droplist, Container, Options } from "./style";
+import { Input, Droplist, Container, Options, DropArrow } from "./style";
 
 const SelectBox = (props: SelectBoxProps): JSX.Element => {
-  const { placeholder, value, options, onChange } = props;
+  const { placeholder, value, options, onChange, disabled } = props;
   const [state, setState] = useGenericState({
     showDropdownList: false,
     currentValue: value || "",
@@ -15,7 +15,7 @@ const SelectBox = (props: SelectBoxProps): JSX.Element => {
 
   useEffect(() => {
     setState({ dropdownList: options });
-  }, [options]);
+  }, [options, value]);
 
   const { showDropdownList, currentValue, dropdownList } = state;
 
@@ -35,7 +35,7 @@ const SelectBox = (props: SelectBoxProps): JSX.Element => {
     }
     let datalist = options;
     datalist = datalist.filter((item) =>
-      item.value
+      item.slug
         .toLocaleLowerCase()
         .startsWith(e.target.value.toLocaleLowerCase())
     );
@@ -49,23 +49,28 @@ const SelectBox = (props: SelectBoxProps): JSX.Element => {
         placeholder={placeholder}
         value={currentValue}
         onChange={handleSearch}
-        onClick={() => setState({ showDropdownList: true })}
+        onClick={() => setState({ showDropdownList: !state.showDropdownList })}
+        disabled={disabled}
+        autoFocus
       />
       {showDropdownList && (
         <Droplist>
           {dropdownList.map((option: OptionProps) => (
             <Options
-              key={option.id}
-              data-value={option.value}
+              key={option._id}
+              data-value={option.slug}
               onClick={() => {
-                handleInputChange(option.value);
+                handleInputChange(option.title ?? option.name);
               }}
             >
-              {option.title}
+              {option.title ?? option.name}
             </Options>
           ))}
         </Droplist>
       )}
+      <DropArrow
+        onClick={() => setState({ showDropdownList: !state.showDropdownList })}
+      />
     </Container>
   );
 };

@@ -10,6 +10,8 @@ import {
   SET_SHOW_WELCOME_MODAL,
   SHOW_SIGNUP_FORM,
   UPDATE_SELECTED_CATEGORIES,
+  CATEGORY_LOADING_START,
+  CATEGORY_LOADING_STOP,
   START_LOADING,
   STOP_LOADING,
 } from "../../containers/WelcomeGuide/constant";
@@ -26,6 +28,7 @@ const initialState = {
     username: "",
     password: "",
   },
+  categoryLoading: false,
   showWelcomeModal: !localStorage.getItem("showWelcomeDialog"),
 };
 
@@ -72,7 +75,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         selectedCategory: state.selectedCategory.filter(
-          (category) => category.id !== payload.id
+          (category) => category._id !== payload._id
         ),
       };
     }
@@ -99,7 +102,19 @@ export default (state = initialState, action) => {
     case SET_SHOW_WELCOME_MODAL: {
       return {
         ...state,
-        showWelcomeModal: false,
+        showWelcomeModal: payload,
+      };
+    }
+    case CATEGORY_LOADING_START: {
+      return {
+        ...state,
+        categoryLoading: true,
+      };
+    }
+    case CATEGORY_LOADING_STOP: {
+      return {
+        ...state,
+        categoryLoading: false,
       };
     }
     case START_LOADING: {

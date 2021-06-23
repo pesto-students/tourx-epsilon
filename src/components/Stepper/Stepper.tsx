@@ -1,25 +1,65 @@
+import { Snackbar } from "@material-ui/core";
 import React from "react";
+import WarningIcon from "@material-ui/icons/Warning";
+import { connect } from "react-redux";
 import useGenericState from "../../Library/useGenericState";
 import { StepsProps } from "./Stepper.interface";
-import { Header, Subheader, Button } from "./styles";
+import { Header, Subheader, Button, ErrorLayout, ErrorSpan } from "./styles";
 
-export default function Stepper(props: StepsProps): JSX.Element {
-  const { className, initial, children, titleList, submit } = props;
+const Stepper = (props: StepsProps): JSX.Element => {
+  const {
+    className,
+    initial,
+    children,
+    titleList,
+    submit,
+    selectedState,
+    selectedCity,
+    selectedCategory,
+  } = props;
 
   const [state, setState] = useGenericState({
     children: React.Children.toArray(children),
     current: initial || 0,
+    showSnackBar: false,
+    snackBarMessage: "",
   });
 
-  const { current, children: steps } = state;
+  const { current, children: steps, showSnackBar, snackBarMessage } = state;
 
   const handleClick = (activeStep: number) => {
+    if (activeStep === 1) {
+      if (!selectedState || !selectedCity) {
+        setState({
+          showSnackBar: true,
+          snackBarMessage: "Please select the State/City of your choice",
+        });
+        return;
+      }
+    }
+
     setState({ current: activeStep });
   };
   const handleSubmit = () => {
+    if (current === 1) {
+      if (selectedCategory.length < 2) {
+        setState({
+          showSnackBar: true,
+          snackBarMessage: "Please select at least 2 Preferences",
+        });
+        return;
+      }
+    }
     submit();
   };
 
+  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setState({ showSnackBar: false });
+  };
   return (
     <div className={className}>
       <Header>
@@ -31,7 +71,7 @@ export default function Stepper(props: StepsProps): JSX.Element {
             <hr className={current === index ? "active" : ""} />
             <div>
               <div className={current === index ? "active" : ""} />
-              <span>Select location</span>
+              <span>{title.description}</span>
             </div>
           </div>
         ))}
@@ -68,6 +108,24 @@ export default function Stepper(props: StepsProps): JSX.Element {
           ""
         )}
       </div>
+      <Snackbar
+        open={showSnackBar}
+        autoHideDuration={3000}
+        onClose={handleClose}
+      >
+        <ErrorLayout>
+          <WarningIcon />
+          <ErrorSpan>{snackBarMessage}</ErrorSpan>
+        </ErrorLayout>
+      </Snackbar>
     </div>
   );
-}
+};
+
+const mapStateToProps = (state: any) => ({
+  selectedState: state.welcomeGuide.selectedState,
+  selectedCity: state.welcomeGuide.selectedCity,
+  selectedCategory: state.welcomeGuide.selectedCategory,
+});
+
+export default connect(mapStateToProps, {})(Stepper);

@@ -76,3 +76,16 @@ export const Tag = styled.span`
     background: #f2f4f8;
   }
 `;
+
+export const SkeletonContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-cotent: start;
+  align-items: center;
+  padding: 0.75rem 0.75rem;
+
+  & > div {
+    width: 90%;
+    margin-left: 24px;
+  }
+`;

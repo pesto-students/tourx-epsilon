@@ -6,7 +6,7 @@ import auth from "./reducers/auth";
 
 export default combineReducers({
   welcomeGuide,
+  auth,
   category,
   places,
-  auth,
 });

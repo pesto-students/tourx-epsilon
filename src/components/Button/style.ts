@@ -14,9 +14,12 @@ export const PrimaryButton = styled.button`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  &:disabled {
+    background: #abb2b9;
+  }
 `;
 
-export const OutlineButton = styled.div`
+export const OutlineButton = styled.button`
   background: white;
   color: black;
   border: 1px solid black;
@@ -30,4 +33,6 @@ export const OutlineButton = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  &:disabled {
+  }
 `;

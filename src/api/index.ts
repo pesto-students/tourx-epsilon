@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import apiProvider, { getErrorMessage } from "./apiProvider";
 
 export const GET = async (
@@ -37,7 +38,11 @@ export const POST = async (
       headers,
     };
 
-    const response = await apiProvider.post(url, body, meta);
+    const response: any = await apiProvider.post(url, body, meta);
+    if (!response.data?.success) {
+      throw response;
+    }
+
     const dataToReturn = {
       ...response.data,
       isSuccess: true,
@@ -47,6 +52,7 @@ export const POST = async (
     return dataToReturn;
   } catch (err) {
     const errorMessage = getErrorMessage(err);
+    toast.error(errorMessage);
     return {
       errorMessage,
       isSuccess: false,

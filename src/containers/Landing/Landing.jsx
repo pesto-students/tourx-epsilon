@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-boolean-value */
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -22,6 +22,14 @@ const Landing = (props) => {
   const { showWelcomeDialog } = props;
   const [open, setOpen] = React.useState(false);
   const [categoryModalOpen, setCategoryModalOpen] = React.useState(false);
+
+  useEffect(() => {
+    if (showWelcomeDialog) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "none";
+    }
+  }, [showWelcomeDialog]);
 
   const handleClickOpen = () => {
     setOpen(true);

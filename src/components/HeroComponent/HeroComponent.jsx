@@ -39,7 +39,7 @@ const HeroComponent = (props) => {
   }, []);
 
   useEffect(() => {
-    if (places.length) {
+    if (places?.length) {
       setTrending(places);
     }
   }, [places]);

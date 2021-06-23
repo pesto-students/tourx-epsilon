@@ -2,6 +2,8 @@
 import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
+import MyAccount from "./containers/MyAccount/MyAccount";
+import PrivateRoute from "./Library/PrivateRoute";
 import Footer from "./components/Footer/Footer";
 import Loader from "./components/Loader/Loader";
 import { RootState } from "./redux/index.interface";
@@ -28,6 +30,12 @@ const Routes = (props: any) => {
     <React.Suspense fallback={<Loader />}>
       <Switch>
         <Route exact path="/" component={Landing} />
+        <Route exact path="/category/9023132" component={DetailsPage} />
+        <PrivateRoute
+          path="/my-account"
+          isAuthenticated={false}
+          component={MyAccount}
+        />
         <Route
           exact
           path="/places/:place_name/:place_id"

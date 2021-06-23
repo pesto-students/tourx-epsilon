@@ -65,3 +65,19 @@ export const Button = styled.button`
   cursor: pointer;
 `;
 export const Layout = styled.div``;
+
+export const ErrorLayout = styled.div`
+  min-width: 250px;
+  min-height: 50px;
+  background: #fece2f;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+`;
+
+export const ErrorSpan = styled.span`
+  margin: 0rem 0.75rem;
+`;

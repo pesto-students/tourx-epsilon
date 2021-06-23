@@ -2,6 +2,7 @@ import {
   ADD_TO_FAVOURAIT,
   GET_LOGGED_IN_USER,
   GET_TESTINOMIAL,
+  SIGNUP_SUCCESS,
 } from "../../containers/Landing/component/CategorySection/constant";
 import { SET_ISAUTH } from "../constant/constant";
 
@@ -14,7 +15,13 @@ const initialState = {
 
 export default (state = initialState, action) => {
   const { type, payload } = action;
+
   switch (type) {
+    case SIGNUP_SUCCESS:
+      return {
+        ...state,
+        user: payload.user,
+      };
     case ADD_TO_FAVOURAIT: {
       return {
         ...state,

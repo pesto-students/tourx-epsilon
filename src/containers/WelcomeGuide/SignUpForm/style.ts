@@ -1,3 +1,4 @@
+import { Checkbox } from "@material-ui/core";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -61,4 +62,9 @@ export const Button = styled.button`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+`;
+
+export const StyledCheckBox = styled(Checkbox)`
+  color: black !important;
+  background-color: black;
 `;

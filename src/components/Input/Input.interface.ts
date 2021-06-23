@@ -6,4 +6,5 @@ export interface InputProps {
   onChange?: (event: any) => void;
   style?: CSSProperties;
   icon?: string;
+  type?: string;
 }

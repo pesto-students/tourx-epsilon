@@ -20,7 +20,8 @@ const PickLocation = (props: any): JSX.Element => {
 
   const handleSelectedState = (value: string) => {
     props.setCurrentState(value);
-    props.fetchCities(value);
+    const selectedStateId = states.find((state: any) => state.title === value);
+    props.fetchCities({ value, stateId: selectedStateId._id });
   };
 
   const handleSelectedCity = (value: string) => {
@@ -42,6 +43,7 @@ const PickLocation = (props: any): JSX.Element => {
         options={cities}
         onChange={handleSelectedCity}
         value={selectedCity}
+        disabled={selectedState === ""}
       />
     </Container>
   );

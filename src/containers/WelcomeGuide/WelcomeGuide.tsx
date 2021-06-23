@@ -14,7 +14,7 @@ const WelcomeGuide = (props: any): JSX.Element => {
     {
       index: 1,
       title: "Please Select Location",
-      description: "Select location",
+      description: "Select Location",
     },
     {
       index: 2,

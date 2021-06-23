@@ -6,6 +6,9 @@ export interface StepsProps {
   children: JSX.Element[];
   titleList: TitleProps[];
   submit: () => void;
+  selectedState: string;
+  selectedCity: string;
+  selectedCategory: [];
 }
 
 export interface TitleProps {

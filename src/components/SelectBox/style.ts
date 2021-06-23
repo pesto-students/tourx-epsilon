@@ -1,17 +1,21 @@
 import styled from "styled-components";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 export const Container = styled.div`
   margin: 0.5rem 0.75rem;
   position: relative;
+  cursor: pointer;
 `;
 
 export const Input = styled.input`
   padding: 0.75rem 0.75rem;
+  padding-right: 2.5rem;
   width: 100%;
   border: 1px solid #cfd0d7;
   color: black;
   outline: none;
   border-radius: 8px;
+  cursor: pointer;
   ::placeholder {
     color: #cfd0d7;
     font-size: 14px;
@@ -42,4 +46,10 @@ export const Options = styled.div`
     background: #f2f4f4;
   }
   z-index: 5;
+`;
+
+export const DropArrow = styled(ExpandMoreIcon)`
+  position: absolute;
+  top: 20%;
+  right: 3%;
 `;

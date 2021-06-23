@@ -18,11 +18,7 @@ export const getErrorMessage = (err: any) => {
   } else {
     const responseData = err.response.data;
     if (responseData && responseData.error) {
-      errorMessage =
-        Object.prototype.toString.call(responseData.error.message) ===
-        "[object Object]"
-          ? responseData.error.message.message
-          : responseData.error.message;
+      errorMessage = responseData.error;
     } else {
       errorMessage = `Something went wrong\n${err.message}`;
     }
