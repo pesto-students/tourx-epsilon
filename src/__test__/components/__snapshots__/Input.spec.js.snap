@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/Input should be rendered properly 1`] = `
+<DocumentFragment>
+  <input
+    class="sc-bdnxRM iaTSye"
+    placeholder=""
+  />
+</DocumentFragment>
+`;

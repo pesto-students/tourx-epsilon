@@ -1,0 +1,161 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/ReviewsCard should be rendered properly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-dlnjwi iMXIIi"
+  >
+    <div
+      class="sc-hKFxyN hYeCAv"
+    >
+      <div
+        class="sc-eCApnc kqbBPp"
+      >
+        <div
+          class="sc-jSFjdj iMOYkM"
+        >
+          25 May 2021
+        </div>
+        <div
+          class="sc-gKAaRy liRQYl"
+        >
+          <div
+            class="sc-fujyAs kmrHkY"
+          >
+            Excellent
+          </div>
+          <div
+            class="sc-iCoGMd cZgeQ"
+          >
+            <div
+              class="sc-gtsrHT eUTdid"
+            >
+              <span
+                class="sc-bdnxRM kqFglc"
+                color="#C0980A"
+                height="20px"
+                rotate="0"
+                width="20px"
+              >
+                <svg
+                  class=""
+                  viewBox="0 0 512 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M394 480a16 16 0 01-9.39-3L256 383.76 127.39 477a16 16 0 01-24.55-18.08L153 310.35 23 221.2a16 16 0 019-29.2h160.38l48.4-148.95a16 16 0 0130.44 0l48.4 149H480a16 16 0 019.05 29.2L359 310.35l50.13 148.53A16 16 0 01394 480z"
+                  />
+                </svg>
+              </span>
+              <span
+                class="sc-bdnxRM kqFglc"
+                color="#C0980A"
+                height="20px"
+                rotate="0"
+                width="20px"
+              >
+                <svg
+                  class=""
+                  viewBox="0 0 512 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M394 480a16 16 0 01-9.39-3L256 383.76 127.39 477a16 16 0 01-24.55-18.08L153 310.35 23 221.2a16 16 0 019-29.2h160.38l48.4-148.95a16 16 0 0130.44 0l48.4 149H480a16 16 0 019.05 29.2L359 310.35l50.13 148.53A16 16 0 01394 480z"
+                  />
+                </svg>
+              </span>
+              <span
+                class="sc-bdnxRM kqFglc"
+                color="#C0980A"
+                height="20px"
+                rotate="0"
+                width="20px"
+              >
+                <svg
+                  class=""
+                  viewBox="0 0 512 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M394 480a16 16 0 01-9.39-3L256 383.76 127.39 477a16 16 0 01-24.55-18.08L153 310.35 23 221.2a16 16 0 019-29.2h160.38l48.4-148.95a16 16 0 0130.44 0l48.4 149H480a16 16 0 019.05 29.2L359 310.35l50.13 148.53A16 16 0 01394 480z"
+                  />
+                </svg>
+              </span>
+              <span
+                class="sc-bdnxRM kqFglc"
+                color="#C0980A"
+                height="20px"
+                rotate="0"
+                width="20px"
+              >
+                <svg
+                  class=""
+                  viewBox="0 0 512 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M480 208H308L256 48l-52 160H32l140 96-54 160 138-100 138 100-54-160z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linejoin="round"
+                    stroke-width="32"
+                  />
+                  <path
+                    d="M256 48v316L118 464l54-160-140-96h172l52-160z"
+                  />
+                </svg>
+              </span>
+              <span
+                class="sc-bdnxRM kqFglc"
+                color="#C0980A"
+                height="20px"
+                rotate="0"
+                width="20px"
+              >
+                <svg
+                  class=""
+                  viewBox="0 0 512 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M480 208H308L256 48l-52 160H32l140 96-54 160 138-100 138 100-54-160z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linejoin="round"
+                    stroke-width="32"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="sc-pNWdM huaUaz"
+      >
+        <div
+          class="sc-jrsJWt jJUkxK"
+        >
+          <img
+            alt="imgProfile"
+            class="sc-kEqXSa bEPfyl"
+            src="https://res.cloudinary.com/thrillophilia/image/upload/c_fill,f_auto,fl_progressive.strip_profile,g_auto,h_300,q_auto,w_400/v1/filestore/euqkvteayahctk0onr7842oo3adx_profile_image.jpg"
+          />
+        </div>
+        <div
+          class="sc-iqAclL cLbgZD"
+        >
+          Marut Butt
+        </div>
+      </div>
+      <div>
+        <div
+          class="sc-crzoAE GcTWJ"
+        >
+          Highly recommended! I booked for my stays at the Serai Resort and I can proudly say that my stays were worth the money. Thrillophilia helped
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/commentBox should be rendered properly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gtsrHT kzlWAZ"
+  >
+    <textarea
+      aria-label="minimum height"
+      class="sc-bdnxRM lcHJYh"
+      placeholder="Enter comments"
+      rows="3"
+      style="height: -4px; overflow: hidden;"
+    />
+    <textarea
+      aria-hidden="true"
+      class="sc-bdnxRM lcHJYh"
+      readonly=""
+      style="visibility: hidden; position: absolute; overflow: hidden; height: 0px; top: 0px; left: 0px; transform: translateZ(0); width: auto;"
+      tabindex="-1"
+    />
+    <div
+      class="sc-dlnjwi hEuURr"
+    >
+      <svg
+        aria-hidden="true"
+        class="MuiSvgIcon-root MuiSvgIcon-colorPrimary"
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"
+        />
+      </svg>
+    </div>
+  </div>
+</DocumentFragment>
+`;

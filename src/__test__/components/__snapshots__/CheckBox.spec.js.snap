@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/checkBox should be rendered properly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bdnxRM bYuVkg"
+    color="#000000"
+    height="24px"
+    rotate="0"
+    width="24px"
+  >
+    <svg
+      class=""
+      viewBox="0 0 512 512"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M416 448H96a32.09 32.09 0 01-32-32V96a32.09 32.09 0 0132-32h320a32.09 32.09 0 0132 32v320a32.09 32.09 0 01-32 32z"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="32"
+      />
+    </svg>
+  </span>
+</DocumentFragment>
+`;

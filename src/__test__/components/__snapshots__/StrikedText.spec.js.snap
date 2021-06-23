@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/StrikedText should be rendered properly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bdnxRM ewqDOx"
+  >
+    <hr
+      class="sc-dlnjwi cuisSO"
+    />
+    <span
+      class="sc-gtsrHT ggiNGg"
+    >
+      sample text
+    </span>
+    <hr
+      class="sc-dlnjwi cuisSO"
+    />
+  </div>
+</DocumentFragment>
+`;

@@ -24,14 +24,15 @@ export const DrawerContainer = styled.div`
 `;
 
 export const LogoItem = styled(Link)`
-  font-weight: 600;
-  color: ${(props) =>
-    props.isTransparent ? "#fffefe" : props.theme.colors.black};
-  text-align: left;
-  font-size: 30px !important;
   &:link {
     text-decoration: none;
   }
+`;
+export const InnerItem = styled.div`
+  font-weight: 600;
+  color: ${(props) => (props.isColored ? "#fffefe" : props.theme.colors.black)};
+  text-align: left;
+  font-size: 30px !important;
   @media screen and (max-width: 540px) {
     font-size: 24px !important;
   }

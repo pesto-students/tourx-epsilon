@@ -6,6 +6,7 @@ import MyAccount from "./containers/MyAccount/MyAccount";
 import PrivateRoute from "./Library/PrivateRoute";
 import Footer from "./components/Footer/Footer";
 import Loader from "./components/Loader/Loader";
+import NotFoundPage from "./components/404/404Page";
 import { RootState } from "./redux/index.interface";
 import { authenticateUser, setIsAuth } from "./redux/commonActions/auth";
 
@@ -46,7 +47,9 @@ const Routes = (props: any) => {
           path="/category/:ct_name/:ct_id"
           component={CategoryListing}
         />
+        <Route component={NotFoundPage} />
       </Switch>
+
       <Footer />
     </React.Suspense>
   );

@@ -4,6 +4,7 @@ import { Toolbar, Drawer, MenuItem } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
+import { uuid } from "uuidv4";
 import {
   HeaderWrapper,
   StyledToolbar,
@@ -11,6 +12,7 @@ import {
   StyledAppBar,
   MenuButton,
   LogoItem,
+  InnerItem,
   ActionButton,
   MenuIconButton,
   EndWrapper,
@@ -52,8 +54,8 @@ const Header = ({ isTransparent, elevation }) => {
 
   // Logo
   const tourxLogo = (
-    <LogoItem to="/" isTransparent={isTransparent}>
-      TourX
+    <LogoItem to="/">
+      <InnerItem isColored={isTransparent}>TourX</InnerItem>
     </LogoItem>
   );
   // Get Menus
@@ -62,18 +64,16 @@ const Header = ({ isTransparent, elevation }) => {
       <>
         {headersData.map(({ label, href }) => {
           return (
-            <>
-              <Link to={href}>
-                <MenuButton
-                  {...{
-                    key: label,
-                  }}
-                  isTransparent={isTransparent}
-                >
-                  {label}
-                </MenuButton>
-              </Link>
-            </>
+            <Link to={href} key={uuid()}>
+              <MenuButton
+                {...{
+                  key: label,
+                }}
+                isTransparent={isTransparent}
+              >
+                {label}
+              </MenuButton>
+            </Link>
           );
         })}
         <ActionButton
@@ -87,7 +87,6 @@ const Header = ({ isTransparent, elevation }) => {
           variant="contained"
           outline="contained"
           isTransparent={isTransparent}
-          compo
         >
           SignUp
         </ActionButton>
@@ -170,7 +169,7 @@ const Header = ({ isTransparent, elevation }) => {
   return (
     <HeaderWrapper elevation={isTransparent ? "none" : elevation}>
       <header>
-        <StyledAppBar color={isTransparent ? "transparent" : "light"}>
+        <StyledAppBar color={isTransparent ? "transparent" : "inherit"}>
           {mobileView ? displayMobile() : displayDesktop()}
         </StyledAppBar>
       </header>
