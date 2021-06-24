@@ -4,44 +4,32 @@ import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import WarningIcon from "@material-ui/icons/Warning";
 import { connect } from "react-redux";
-import Button from "../../../components/Button/Button";
-import Input from "../../../components/Input/Input";
-import { ErrorLayout, ErrorSpan } from "../../../components/Stepper/styles";
+import Button from "../Button/Button";
+import Input from "../Input/Input";
+import { ErrorLayout, ErrorSpan } from "../Stepper/styles";
 // import StrikedText from "../../../components/StrikedText/StrikedText";
-import useGenericState from "../../../Library/useGenericState";
-import { setFormValues, setShowWelcomeModal, signupUser } from "../action";
+import useGenericState from "../../Library/useGenericState";
+import { authenticateUser, loginUser } from "../../redux/commonActions/auth";
 import {
   ButtonWrapper,
   Container,
   Header,
   InputContainer,
   Label,
-  LabelContainer,
-  Span,
-  StyledCheckBox,
   SubHeader,
 } from "./style";
 
-const Signup = (props: any): JSX.Element => {
+const Login = (props: any): JSX.Element => {
   const [state, setState] = useGenericState({
     username: "",
     password: "",
-    confirmPassword: "",
-    agree: false,
     showSnackBar: false,
     snackBarMessage: "",
   });
 
-  const {
-    username,
-    password,
-    agree,
-    showSnackBar,
-    snackBarMessage,
-    confirmPassword,
-  } = state;
+  const { username, password, showSnackBar, snackBarMessage } = state;
 
-  const { selectedCategories, isAuth } = props;
+  const { isAuth, handleDrawerClose } = props;
   const history = useHistory();
 
   useEffect(() => {
@@ -50,8 +38,8 @@ const Signup = (props: any): JSX.Element => {
     }
   }, [isAuth]);
 
-  const handleSignup = () => {
-    if (username === "" || password === "" || confirmPassword === "") {
+  const handleLogin = async () => {
+    if (username === "" || password === "") {
       setState({
         showSnackBar: true,
         snackBarMessage: "Username and Password are Required",
@@ -59,23 +47,15 @@ const Signup = (props: any): JSX.Element => {
       return;
     }
 
-    if (password !== confirmPassword) {
-      setState({
-        showSnackBar: true,
-        snackBarMessage: "Password Didn't Matched",
-      });
-      return;
-    }
-
-    props.signupUser({
-      username: state.username,
+    const response = await props.loginUser({
+      email: state.username,
       password: state.password,
-      selectedCategories,
     });
-  };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({ agree: event.target.checked });
+    if (response.isSuccess) {
+      props.authenticateUser(response.token);
+      handleDrawerClose();
+    }
   };
 
   const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
@@ -87,9 +67,9 @@ const Signup = (props: any): JSX.Element => {
   };
   return (
     <Container>
-      <Header>Sign up for Tourx</Header>
+      <Header>Login for Tourx</Header>
       <SubHeader>
-        Sign up using your email address or phone number below to get started.
+        Login using your email address or phone number below to get started.
       </SubHeader>
       <InputContainer>
         <Label>Email or phone number</Label>
@@ -108,22 +88,9 @@ const Signup = (props: any): JSX.Element => {
           onChange={(e) => setState({ password: e.target.value })}
         />
       </InputContainer>
-      <InputContainer>
-        <Label>Remember Password</Label>
-        <Input
-          placeholder="Enter Password Again"
-          type="password"
-          icon="https://img.icons8.com/ios/452/password--v1.png"
-          onChange={(e) => setState({ confirmPassword: e.target.value })}
-        />
-      </InputContainer>
-      <LabelContainer>
-        <StyledCheckBox onChange={handleChange} />
-        <Span>I agree to the terms and conditions</Span>
-      </LabelContainer>
       <ButtonWrapper>
-        <Button disabled={!agree} type="primary" onClick={handleSignup}>
-          Create Account
+        <Button type="primary" onClick={handleLogin}>
+          Login to Tourx
         </Button>
       </ButtonWrapper>
 
@@ -155,7 +122,6 @@ const mapStateToProps = (state: any) => ({
 });
 
 export default connect(mapStateToProps, {
-  setFormValues,
-  setShowWelcomeModal,
-  signupUser,
-})(Signup);
+  loginUser,
+  authenticateUser,
+})(Login);

@@ -1,8 +1,8 @@
 import { Dispatch } from "redux";
-import { GET } from "../../api";
+import { GET, POST } from "../../api";
 import { AUTH_ROUTES, BACKEND_BASE_URL } from "../../api/routes";
 import { GET_LOGGED_IN_USER } from "../../containers/Landing/component/CategorySection/constant";
-import { SET_ISAUTH } from "../constant/constant";
+import { LOGIN, SET_ISAUTH } from "../constant/constant";
 
 export const setIsAuth = (isAuth: boolean) => ({
   type: SET_ISAUTH,
@@ -29,3 +29,16 @@ export const authenticateUser =
       dispatch(setIsAuth(false));
     }
   };
+
+export const loginUser = (payload: any) => async (dispatch: Dispatch) => {
+  const response: any = await POST(
+    `${BACKEND_BASE_URL}/${AUTH_ROUTES}/login`,
+    payload
+  );
+
+  dispatch({
+    type: LOGIN,
+  });
+
+  return response;
+};

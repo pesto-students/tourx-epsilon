@@ -28,6 +28,7 @@ import {
 } from "./Style";
 import { setIsAuth } from "../../redux/commonActions/auth";
 import Signup from "../../containers/WelcomeGuide/SignUpForm/Signup";
+import Login from "../LoginForm/Login";
 
 const headersData = [
   {
@@ -41,9 +42,10 @@ const Header = ({ isTransparent, elevation, isAuth, setIsAuth }) => {
     drawerOpen: false,
     loading: false,
     open: false,
+    loginOpen: false,
   });
 
-  const { mobileView, drawerOpen, loading, open } = state;
+  const { mobileView, drawerOpen, loading, open, loginOpen } = state;
 
   const history = useHistory();
 
@@ -122,6 +124,7 @@ const Header = ({ isTransparent, elevation, isAuth, setIsAuth }) => {
               variant="outlined"
               outline="outline"
               isTransparent={isTransparent}
+              onClick={() => setState({ ...state, loginOpen: true })}
             >
               Login
             </ActionButton>
@@ -146,6 +149,23 @@ const Header = ({ isTransparent, elevation, isAuth, setIsAuth }) => {
         >
           <DialogContent>
             <Signup padding="2rem 2rem" isModal />
+          </DialogContent>
+        </Dialog>
+        <Dialog
+          open={loginOpen}
+          onClose={() => setState({ ...state, loginOpen: false })}
+          scroll="paper"
+          aria-labelledby="scroll-dialog-title"
+          aria-describedby="scroll-dialog-description"
+          fullWidth
+          maxWidth="sm"
+        >
+          <DialogContent>
+            <Login
+              padding="2rem 2rem"
+              isModal
+              handleDrawerClose={() => setState({ ...state, loginOpen: false })}
+            />
           </DialogContent>
         </Dialog>
       </>
