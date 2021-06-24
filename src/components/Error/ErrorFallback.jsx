@@ -3,7 +3,14 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import Header from "../Header/Header";
-import { Container, Wrapper, Reload, Text, Illustration } from "./Style";
+import {
+  Container,
+  Wrapper,
+  Reload,
+  Text,
+  Illustration,
+  StyledButton,
+} from "./Style";
 import ErroSvg from "../../static/error.svg";
 import Footer from "../Footer/Footer";
 
@@ -15,13 +22,13 @@ function ErrorFallback({ error, componentStack, resetErrorBoundary }) {
         <Wrapper>
           <Illustration src={ErroSvg} alt="error" />
           <Text>Opps! , Something Went Wrong</Text>
-          <Button
+          <StyledButton
             onClick={resetErrorBoundary}
             variant="contained"
             color="primary"
           >
             Retry
-          </Button>
+          </StyledButton>
         </Wrapper>
       </Container>
       <Footer />

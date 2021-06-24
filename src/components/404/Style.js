@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Button } from "@material-ui/core";
 
 export const Container = styled.div`
   width: 100%;
@@ -7,6 +8,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 4rem 8rem;
 `;
 
 export const Wrapper = styled.div`
@@ -35,4 +37,9 @@ export const Illustration = styled.img`
   max-width: 500px;
   width: 350px;
   margin-bottom: 20px;
+`;
+
+export const StyledButton = styled(Button)`
+  color: white;
+  background: black !important;
 `;

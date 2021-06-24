@@ -1,3 +1,4 @@
+import { Button } from "@material-ui/core";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -17,9 +18,10 @@ export const Wrapper = styled.div`
   align-items: center;
 `;
 export const Text = styled.div`
-  font-size: 22px;
+  font-size: 28px;
   font-weight: 500;
   padding: 10px 0px;
+  margin: 24px 0px;
 `;
 export const Reload = styled.div`
   background-color: ${(props) => props.theme.colors.purple_1};
@@ -35,4 +37,9 @@ export const Illustration = styled.img`
   max-width: 500px;
   width: 350px;
   margin-bottom: 20px;
+`;
+
+export const StyledButton = styled(Button)`
+  color: white;
+  background: black !important;
 `;

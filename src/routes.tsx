@@ -9,6 +9,8 @@ import Loader from "./components/Loader/Loader";
 import NotFoundPage from "./components/404/404Page";
 import { RootState } from "./redux/index.interface";
 import { authenticateUser, setIsAuth } from "./redux/commonActions/auth";
+import { useNetwork } from "./Library/helper";
+import NetworkError from "./components/NetworkError/NetworkError";
 
 const Landing = React.lazy(() => import("./containers/Landing/Landing"));
 const DetailsPage = React.lazy(
@@ -27,28 +29,35 @@ const Routes = (props: any) => {
       props.setIsAuth(false);
     }
   }, []);
+
+  const isOnline = useNetwork();
+
   return (
     <React.Suspense fallback={<Loader />}>
-      <Switch>
-        <Route exact path="/" component={Landing} />
-        <Route exact path="/category/9023132" component={DetailsPage} />
-        <PrivateRoute
-          path="/my-account"
-          isAuthenticated={false}
-          component={MyAccount}
-        />
-        <Route
-          exact
-          path="/places/:place_name/:place_id"
-          component={DetailsPage}
-        />
-        <Route
-          exact
-          path="/category/:ct_name/:ct_id"
-          component={CategoryListing}
-        />
-        <Route component={NotFoundPage} />
-      </Switch>
+      {isOnline ? (
+        <Switch>
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/category/9023132" component={DetailsPage} />
+          <PrivateRoute
+            path="/my-account"
+            isAuthenticated={false}
+            component={MyAccount}
+          />
+          <Route
+            exact
+            path="/places/:place_name/:place_id"
+            component={DetailsPage}
+          />
+          <Route
+            exact
+            path="/category/:ct_name/:ct_id"
+            component={CategoryListing}
+          />
+          <Route component={NotFoundPage} />
+        </Switch>
+      ) : (
+        <NetworkError />
+      )}
 
       <Footer />
     </React.Suspense>

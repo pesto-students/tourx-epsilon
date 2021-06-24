@@ -4,8 +4,15 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import Header from "../Header/Header";
-import { Container, Wrapper, Reload, Text, Illustration } from "./Style";
-import ErroSvg from "../../static/404Page.svg";
+import {
+  Container,
+  Wrapper,
+  Reload,
+  Text,
+  Illustration,
+  StyledButton,
+} from "./Style";
+import ErroSvg from "../../static/404-1.gif";
 
 function NotFoundPage() {
   return (
@@ -16,9 +23,9 @@ function NotFoundPage() {
           <Illustration src={ErroSvg} alt="error" />
           <Text>Oops! We couldn’t find that page.</Text>
           <Link to="/">
-            <Button variant="contained" color="primary">
+            <StyledButton variant="contained" color="primary">
               Back to Home
-            </Button>
+            </StyledButton>
           </Link>
         </Wrapper>
       </Container>
