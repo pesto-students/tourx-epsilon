@@ -1,8 +1,17 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React, { useState, useEffect } from "react";
-import { Toolbar, Drawer, MenuItem } from "@material-ui/core";
+import {
+  Toolbar,
+  Drawer,
+  MenuItem,
+  Dialog,
+  DialogContent,
+} from "@material-ui/core";
+import CachedIcon from "@material-ui/icons/Cached";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import { uuid } from "uuidv4";
 import {
@@ -17,24 +26,26 @@ import {
   MenuIconButton,
   EndWrapper,
 } from "./Style";
+import { setIsAuth } from "../../redux/commonActions/auth";
+import Signup from "../../containers/WelcomeGuide/SignUpForm/Signup";
 
 const headersData = [
-  {
-    label: "Categories",
-    href: "/category/9023132",
-  },
   {
     label: "About us",
     href: "/",
   },
 ];
-const Header = ({ isTransparent, elevation }) => {
+const Header = ({ isTransparent, elevation, isAuth, setIsAuth }) => {
   const [state, setState] = useState({
     mobileView: false,
     drawerOpen: false,
+    loading: false,
+    open: false,
   });
 
-  const { mobileView, drawerOpen } = state;
+  const { mobileView, drawerOpen, loading, open } = state;
+
+  const history = useHistory();
 
   useEffect(() => {
     const setResponsiveness = () => {
@@ -51,6 +62,15 @@ const Header = ({ isTransparent, elevation }) => {
       window.removeEventListener("resize", () => setResponsiveness());
     };
   }, []);
+
+  const logout = () => {
+    setState({ ...state, loading: true });
+    localStorage.removeItem("AuthToken");
+    setTimeout(() => {
+      setState({ ...state, loading: true });
+      setIsAuth(false);
+    }, 2000);
+  };
 
   // Logo
   const tourxLogo = (
@@ -76,20 +96,58 @@ const Header = ({ isTransparent, elevation }) => {
             </Link>
           );
         })}
-        <ActionButton
-          variant="outlined"
-          outline="outline"
-          isTransparent={isTransparent}
+        {isAuth ? (
+          <>
+            <ActionButton
+              variant="outlined"
+              outline="outline"
+              isTransparent={isTransparent}
+              onClick={() => history.push("/my-account")}
+            >
+              My Account
+            </ActionButton>
+            <ActionButton
+              variant="outlined"
+              outline="outline"
+              isTransparent={isTransparent}
+              onClick={() => logout()}
+              startIcon={loading ? <CachedIcon /> : null}
+            >
+              Logout
+            </ActionButton>
+          </>
+        ) : (
+          <>
+            <ActionButton
+              variant="outlined"
+              outline="outline"
+              isTransparent={isTransparent}
+            >
+              Login
+            </ActionButton>
+            <ActionButton
+              variant="contained"
+              outline="contained"
+              isTransparent={isTransparent}
+              onClick={() => setState({ ...state, open: true })}
+            >
+              SignUp
+            </ActionButton>{" "}
+          </>
+        )}
+        <Dialog
+          open={open}
+          onClose={() => setState({ ...state, open: false })}
+          scroll="paper"
+          aria-labelledby="scroll-dialog-title"
+          aria-describedby="scroll-dialog-description"
+          fullWidth
+          maxWidth="sm"
         >
-          Login
-        </ActionButton>
-        <ActionButton
-          variant="contained"
-          outline="contained"
-          isTransparent={isTransparent}
-        >
-          SignUp
-        </ActionButton>
+          <DialogContent>
+            <Signup padding="2rem 2rem" isModal />
+          </DialogContent>
+        </Dialog>
       </>
     );
   };
@@ -180,11 +238,19 @@ const Header = ({ isTransparent, elevation }) => {
 Header.propTypes = {
   isTransparent: PropTypes.bool,
   elevation: PropTypes.string,
+  isAuth: PropTypes.bool,
+  setIsAuth: PropTypes.func,
 };
 
 Header.defaultProps = {
   isTransparent: false,
   elevation: "apply",
+  isAuth: false,
+  setIsAuth: () => {},
 };
 
-export default Header;
+const mapStateToProps = (state) => ({
+  isAuth: state.auth.isAuth,
+});
+
+export default connect(mapStateToProps, { setIsAuth })(Header);

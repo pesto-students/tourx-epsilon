@@ -30,6 +30,8 @@ const Routes = (props: any) => {
     }
   }, []);
 
+  const { isAuth } = props;
+
   const isOnline = useNetwork();
 
   return (
@@ -40,7 +42,7 @@ const Routes = (props: any) => {
           <Route exact path="/category/9023132" component={DetailsPage} />
           <PrivateRoute
             path="/my-account"
-            isAuthenticated={false}
+            isAuthenticated={isAuth}
             component={MyAccount}
           />
           <Route
