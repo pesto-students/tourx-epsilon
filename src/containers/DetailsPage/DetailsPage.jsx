@@ -48,10 +48,19 @@ const DetailsPage = (props) => {
     props.fetchReviews();
   }, [params.place_id]);
 
-  const handleAddReview = (text) => {
-    props.fetchPlaceDetails(params.place_id);
-    props.addReview(params.place_id, text, rating, user._id);
+  const handleAddReview = async (text) => {
+    const response = await props.addReview(
+      params.place_id,
+      text,
+      rating,
+      user._id,
+      user.email
+    );
     setRating(0);
+
+    if (response.isSuccess) {
+      props.fetchPlaceDetails(params.place_id);
+    }
   };
 
   useEffect(() => {

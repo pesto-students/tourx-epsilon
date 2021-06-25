@@ -10,11 +10,12 @@ export const Wrapper = styled.div`
   padding: 16px 16px 23.6px;
   box-shadow: 0px 1px 4px rgb(0 0 0 / 25%);
   border-radius: 10px;
+  height: 240px;
 `;
 
 export const TopSection = styled.div`
   justify-content: space-between;
-  margin-bottom: 53px;
+  margin-bottom: 12px;
   display: flex;
 `;
 export const Date = styled.div`
@@ -69,6 +70,7 @@ export const Deatils = styled.div`
   font-weight: bold;
   color: #4d4c4c;
   text-align: center;
+  margin-bottom: 8px;
 `;
 export const ReviewsSection = styled.div`
   color: #868686;
@@ -82,4 +84,9 @@ export const ReviewsSection = styled.div`
   /* max-height: 64.68px; */
   transition: 0.2s max-height;
   overflow: hidden;
+`;
+
+export const Readmore = styled.p`
+  text-align: center;
+  font-size: 14px;
 `;

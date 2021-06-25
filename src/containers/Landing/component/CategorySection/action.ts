@@ -76,7 +76,7 @@ export const fetchPopularPlaces = () => async (dispatch: Dispatch) => {
 export const addToFavourait =
   (payload: string) => async (dispatch: Dispatch) => {
     const response = await POST(
-      `${BACKEND_BASE_URL}/${USER_ROUTE}/favourait`,
+      `${BACKEND_BASE_URL}/${USER_ROUTE}/favourite`,
       {
         id: payload,
       },

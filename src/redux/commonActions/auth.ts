@@ -2,11 +2,16 @@ import { Dispatch } from "redux";
 import { GET, POST } from "../../api";
 import { AUTH_ROUTES, BACKEND_BASE_URL } from "../../api/routes";
 import { GET_LOGGED_IN_USER } from "../../containers/Landing/component/CategorySection/constant";
+import { LOGOUT } from "../../containers/WelcomeGuide/constant";
 import { LOGIN, SET_ISAUTH } from "../constant/constant";
 
 export const setIsAuth = (isAuth: boolean) => ({
   type: SET_ISAUTH,
   payload: isAuth,
+});
+
+export const logoutUser = () => ({
+  type: LOGOUT,
 });
 
 export const authenticateUser =

@@ -1,7 +1,7 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Snackbar } from "@material-ui/core";
 import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import WarningIcon from "@material-ui/icons/Warning";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -32,11 +32,10 @@ const Login = (props: any): JSX.Element => {
   const { username, password, showSnackBar, snackBarMessage } = state;
 
   const { isAuth, handleDrawerClose } = props;
-  const history = useHistory();
 
   useEffect(() => {
     if (isAuth) {
-      history.push("/");
+      location.reload();
     }
   }, [isAuth]);
 

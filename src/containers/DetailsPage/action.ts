@@ -56,7 +56,13 @@ export const fetchReviews = () => async (dispatch: Dispatch) => {
 };
 
 export const addReview =
-  (placeId: string, text: string, rating: number, user: string) =>
+  (
+    placeId: string,
+    text: string,
+    rating: number,
+    user: string,
+    username: string
+  ) =>
   async (dispatch: Dispatch) => {
     const response = await POST(
       `${BACKEND_BASE_URL}/${REVIEW_ROUTES}?placeId=${placeId}`,
@@ -65,15 +71,14 @@ export const addReview =
         description: text,
         user,
         placeId,
+        imgUrl: "https://i.pravatar.cc/120",
+        username: username.split("@")[0],
       },
       getDefaultHeaders()
     );
 
-    if (response.isSuccess) {
-      fetchPlaceDetails(placeId);
-    }
-
     dispatch({
       type: ADD_REVIEW,
     });
+    return response;
   };

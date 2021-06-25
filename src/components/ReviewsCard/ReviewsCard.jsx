@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { Tooltip } from "@material-ui/core";
 import React from "react";
 import StarRating from "../StartRating/StarRating";
 import {
@@ -14,6 +15,7 @@ import {
   Img,
   ReviewsSection,
   RatingWrapper,
+  Readmore,
 } from "./Style";
 
 function ReviewsCard(props) {
@@ -37,15 +39,24 @@ function ReviewsCard(props) {
         </TopSection>
         <UserDetail>
           <ImageWarp>
-            <Img
-              src="https://res.cloudinary.com/thrillophilia/image/upload/c_fill,f_auto,fl_progressive.strip_profile,g_auto,h_300,q_auto,w_400/v1/filestore/euqkvteayahctk0onr7842oo3adx_profile_image.jpg"
-              alt="imgProfile"
-            />
+            <Img src={review?.imgUrl} alt="imgProfile" />
           </ImageWarp>
-          <Deatils>{review?.user?.email?.split("@")[0]}</Deatils>
         </UserDetail>
         <div>
-          <ReviewsSection>{review?.description}</ReviewsSection>
+          <Deatils>{review?.username}</Deatils>
+          <ReviewsSection>{`${review?.description.slice(
+            0,
+            200
+          )}... `}</ReviewsSection>
+          {review?.description?.length > 200 ? (
+            <Tooltip
+              title={review?.description}
+              aria-label="description"
+              style={{ fontSize: "14px" }}
+            >
+              <Readmore>Read more</Readmore>
+            </Tooltip>
+          ) : null}
         </div>
       </Wrapper>
     </ReviewCardWrap>

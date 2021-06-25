@@ -4,6 +4,7 @@ import {
   GET_TESTINOMIAL,
   SIGNUP_SUCCESS,
 } from "../../containers/Landing/component/CategorySection/constant";
+import { LOGOUT } from "../../containers/WelcomeGuide/constant";
 import { SET_ISAUTH } from "../constant/constant";
 
 const initialState = {
@@ -44,6 +45,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isAuth: payload,
+      };
+    }
+    case LOGOUT: {
+      return {
+        ...state,
+        token: "",
+        user: {},
       };
     }
     default:

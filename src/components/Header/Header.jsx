@@ -26,7 +26,7 @@ import {
   MenuIconButton,
   EndWrapper,
 } from "./Style";
-import { setIsAuth } from "../../redux/commonActions/auth";
+import { setIsAuth, logoutUser } from "../../redux/commonActions/auth";
 import Signup from "../../containers/WelcomeGuide/SignUpForm/Signup";
 import Login from "../LoginForm/Login";
 
@@ -36,7 +36,13 @@ const headersData = [
     href: "/",
   },
 ];
-const Header = ({ isTransparent, elevation, isAuth, setIsAuth }) => {
+const Header = ({
+  isTransparent,
+  elevation,
+  isAuth,
+  setIsAuth,
+  logoutUser,
+}) => {
   const [state, setState] = useState({
     mobileView: false,
     drawerOpen: false,
@@ -68,6 +74,7 @@ const Header = ({ isTransparent, elevation, isAuth, setIsAuth }) => {
   const logout = () => {
     setState({ ...state, loading: true });
     localStorage.removeItem("AuthToken");
+    logoutUser();
     setTimeout(() => {
       setState({ ...state, loading: true });
       setIsAuth(false);
@@ -260,6 +267,7 @@ Header.propTypes = {
   elevation: PropTypes.string,
   isAuth: PropTypes.bool,
   setIsAuth: PropTypes.func,
+  logoutUser: PropTypes.func,
 };
 
 Header.defaultProps = {
@@ -267,10 +275,11 @@ Header.defaultProps = {
   elevation: "apply",
   isAuth: false,
   setIsAuth: () => {},
+  logoutUser: () => {},
 };
 
 const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
 });
 
-export default connect(mapStateToProps, { setIsAuth })(Header);
+export default connect(mapStateToProps, { setIsAuth, logoutUser })(Header);
