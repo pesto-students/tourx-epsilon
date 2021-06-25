@@ -9,7 +9,6 @@ import Signup from "./SignUpForm/Signup";
 import { Container, Modal } from "./style";
 
 const WelcomeGuide = (props: any): JSX.Element => {
-  const { showSignup } = props;
   const titleList = [
     {
       index: 1,
@@ -21,23 +20,25 @@ const WelcomeGuide = (props: any): JSX.Element => {
       title: "Please Select Preferences",
       description: "Select Preferences",
     },
+    {
+      index: 3,
+      title: "Sign up for Tourx",
+      description: "Signup",
+    },
   ];
 
   return (
     <Container>
       <Modal>
-        {!showSignup ? (
-          <Stepper
-            initial={0}
-            titleList={titleList}
-            submit={() => props.showSignupForm()}
-          >
-            <PickLocation />
-            <PickPreferences />
-          </Stepper>
-        ) : (
-          <Signup />
-        )}
+        <Stepper
+          initial={0}
+          titleList={titleList}
+          submit={() => props.showSignupForm()}
+        >
+          <PickLocation />
+          <PickPreferences />
+          <Signup isModal />
+        </Stepper>
       </Modal>
     </Container>
   );

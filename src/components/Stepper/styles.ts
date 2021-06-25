@@ -30,18 +30,22 @@ export const Subheader = styled.div`
       justify-content: start;
 
       > div {
-        height: 18px;
-        width: 18px;
+        height: 24px;
+        width: 24px;
         margin: 0px 4px 0px 0px;
-        border: 2px solid grey;
         border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem;
       }
 
       > div.active {
-        border: 7px solid black;
-        height: 6px;
-        width: 6px;
-        padding: 0.2rem;
+        background: black;
+        height: 24px;
+        width: 24px;
+        padding: 0.5rem;
+        color: white;
       }
 
       span {

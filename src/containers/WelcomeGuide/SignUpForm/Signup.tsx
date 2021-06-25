@@ -41,7 +41,7 @@ const Signup = (props: any): JSX.Element => {
     confirmPassword,
   } = state;
 
-  const { selectedCategories, isAuth } = props;
+  const { selectedCategories, isAuth, isModal } = props;
   const history = useHistory();
 
   useEffect(() => {
@@ -87,10 +87,15 @@ const Signup = (props: any): JSX.Element => {
   };
   return (
     <Container>
-      <Header>Sign up for Tourx</Header>
-      <SubHeader>
-        Sign up using your email address or phone number below to get started.
-      </SubHeader>
+      {!isModal ? (
+        <>
+          <Header>Sign up for Tourx</Header>
+          <SubHeader>
+            Sign up using your email address or phone number below to get
+            started.
+          </SubHeader>
+        </>
+      ) : null}
       <InputContainer>
         <Label>Email or phone number</Label>
         <Input

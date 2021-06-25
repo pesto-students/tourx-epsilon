@@ -1,5 +1,6 @@
 import { Snackbar } from "@material-ui/core";
 import React from "react";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import WarningIcon from "@material-ui/icons/Warning";
 import { connect } from "react-redux";
 import useGenericState from "../../Library/useGenericState";
@@ -12,7 +13,6 @@ const Stepper = (props: StepsProps): JSX.Element => {
     initial,
     children,
     titleList,
-    submit,
     selectedState,
     selectedCity,
     selectedCategory,
@@ -38,9 +38,6 @@ const Stepper = (props: StepsProps): JSX.Element => {
       }
     }
 
-    setState({ current: activeStep });
-  };
-  const handleSubmit = () => {
     if (current === 1) {
       if (selectedCategory.length < 2) {
         setState({
@@ -50,7 +47,8 @@ const Stepper = (props: StepsProps): JSX.Element => {
         return;
       }
     }
-    submit();
+
+    setState({ current: activeStep });
   };
 
   const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
@@ -70,7 +68,15 @@ const Stepper = (props: StepsProps): JSX.Element => {
           <div key={title.index}>
             <hr className={current === index ? "active" : ""} />
             <div>
-              <div className={current === index ? "active" : ""} />
+              {(current === 1 && index === 0) ||
+              (current === 2 && index === 1) ||
+              (current === 2 && index === 0) ? (
+                <CheckCircleIcon style={{ width: "24px", height: "24px" }} />
+              ) : (
+                <div className={current === index ? "active" : ""}>
+                  {index + 1}
+                </div>
+              )}
               <span>{title.description}</span>
             </div>
           </div>
@@ -96,13 +102,6 @@ const Stepper = (props: StepsProps): JSX.Element => {
             onClick={() => handleClick(current - 1)}
           >
             Previous
-          </Button>
-        ) : (
-          ""
-        )}
-        {current === children.length - 1 ? (
-          <Button type="button" onClick={handleSubmit}>
-            Sign Up
           </Button>
         ) : (
           ""
