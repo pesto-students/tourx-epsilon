@@ -3,6 +3,8 @@ import { Snackbar } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import WarningIcon from "@material-ui/icons/Warning";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { connect } from "react-redux";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
@@ -53,6 +55,7 @@ const Login = (props: any): JSX.Element => {
     });
 
     if (response.isSuccess) {
+      localStorage.setItem("AuthToken", response.token);
       props.authenticateUser(response.token);
       handleDrawerClose();
     }
@@ -65,6 +68,7 @@ const Login = (props: any): JSX.Element => {
 
     setState({ showSnackBar: false });
   };
+
   return (
     <Container>
       <Header>Login for Tourx</Header>
@@ -112,6 +116,7 @@ const Login = (props: any): JSX.Element => {
           <ErrorSpan>{snackBarMessage}</ErrorSpan>
         </ErrorLayout>
       </Snackbar>
+      <ToastContainer />
     </Container>
   );
 };
