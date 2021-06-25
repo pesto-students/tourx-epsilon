@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React, { useState, useEffect } from "react";
@@ -8,10 +9,10 @@ import {
   Dialog,
   DialogContent,
 } from "@material-ui/core";
-import CachedIcon from "@material-ui/icons/Cached";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import { uuid } from "uuidv4";
 import {
@@ -25,6 +26,11 @@ import {
   ActionButton,
   MenuIconButton,
   EndWrapper,
+  RelativeWrapper,
+  Profile,
+  List,
+  Avatar,
+  Span,
 } from "./Style";
 import { setIsAuth, logoutUser } from "../../redux/commonActions/auth";
 import Signup from "../../containers/WelcomeGuide/SignUpForm/Signup";
@@ -42,6 +48,7 @@ const Header = ({
   isAuth,
   setIsAuth,
   logoutUser,
+  user,
 }) => {
   const [state, setState] = useState({
     mobileView: false,
@@ -49,11 +56,10 @@ const Header = ({
     loading: false,
     open: false,
     loginOpen: false,
+    profileOpen: false,
   });
 
-  const { mobileView, drawerOpen, loading, open, loginOpen } = state;
-
-  const history = useHistory();
+  const { mobileView, drawerOpen, open, loginOpen, profileOpen } = state;
 
   useEffect(() => {
     const setResponsiveness = () => {
@@ -79,6 +85,26 @@ const Header = ({
       setState({ ...state, loading: true });
       setIsAuth(false);
     }, 2000);
+  };
+
+  const handleProfileClose = (e) => {
+    if (
+      e.target.id !== "profile" &&
+      e.target.id !== "my-profile" &&
+      e.target.parentElement.id !== "my-profile"
+    ) {
+      setState({ ...state, profileOpen: false });
+
+      document.getElementsByTagName("body")[0].removeEventListener("click");
+    }
+  };
+
+  const handleProfileOpen = () => {
+    setState({ ...state, profileOpen: true });
+
+    document.getElementsByTagName("body")[0].addEventListener("click", (e) => {
+      handleProfileClose(e);
+    });
   };
 
   // Logo
@@ -108,22 +134,29 @@ const Header = ({
         {isAuth ? (
           <>
             <ActionButton
-              variant="outlined"
-              outline="outline"
               isTransparent={isTransparent}
-              onClick={() => history.push("/my-account")}
+              style={{ background: "transparent" }}
+              id="my-profile"
+              onClick={handleProfileOpen}
             >
               My Account
             </ActionButton>
-            <ActionButton
-              variant="outlined"
-              outline="outline"
-              isTransparent={isTransparent}
-              onClick={() => logout()}
-              startIcon={loading ? <CachedIcon /> : null}
-            >
-              Logout
-            </ActionButton>
+            <RelativeWrapper>
+              {profileOpen ? (
+                <Profile id="profile">
+                  <List className="profile" variant="outlined">
+                    <Avatar src="https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png" />
+                  </List>
+                  <List className="profile" variant="outlined">
+                    <Span>{user.email}</Span>
+                  </List>
+                  <List variant="outlined" onClick={() => logout()}>
+                    <ExitToAppIcon />
+                    Logout
+                  </List>
+                </Profile>
+              ) : null}
+            </RelativeWrapper>
           </>
         ) : (
           <>
@@ -232,20 +265,69 @@ const Header = ({
 
         <div>{tourxLogo}</div>
         <EndWrapper>
-          <ActionButton
-            variant="outlined"
-            outline="outline"
-            isTransparent={isTransparent}
+          {isAuth ? (
+            <>
+              <ActionButton
+                variant="outlined"
+                outline="outline"
+                isTransparent={isTransparent}
+              >
+                My Account
+              </ActionButton>
+            </>
+          ) : (
+            <>
+              <ActionButton
+                variant="outlined"
+                outline="outline"
+                isTransparent={isTransparent}
+                onClick={() => setState({ ...state, loginOpen: true })}
+              >
+                Login
+              </ActionButton>
+              <ActionButton
+                variant="contained"
+                outline="contained"
+                isTransparent={isTransparent}
+                onClick={() => setState({ ...state, open: true })}
+              >
+                SignUp
+              </ActionButton>
+            </>
+          )}
+
+          <Dialog
+            open={open}
+            onClose={() => setState({ ...state, open: false })}
+            scroll="paper"
+            aria-labelledby="scroll-dialog-title"
+            aria-describedby="scroll-dialog-description"
+            fullWidth
+            maxWidth="sm"
           >
-            Login
-          </ActionButton>
-          <ActionButton
-            variant="contained"
-            outline="contained"
-            isTransparent={isTransparent}
+            <DialogContent>
+              <Signup padding="2rem 2rem" isModal />
+            </DialogContent>
+          </Dialog>
+          <Dialog
+            open={loginOpen}
+            onClose={() => setState({ ...state, loginOpen: false })}
+            scroll="paper"
+            aria-labelledby="scroll-dialog-title"
+            aria-describedby="scroll-dialog-description"
+            fullWidth
+            maxWidth="sm"
           >
-            SignUp
-          </ActionButton>
+            <DialogContent>
+              <Login
+                padding="2rem 2rem"
+                isModal
+                handleDrawerClose={() =>
+                  setState({ ...state, loginOpen: false })
+                }
+              />
+            </DialogContent>
+          </Dialog>
         </EndWrapper>
       </Toolbar>
     );
@@ -268,6 +350,7 @@ Header.propTypes = {
   isAuth: PropTypes.bool,
   setIsAuth: PropTypes.func,
   logoutUser: PropTypes.func,
+  user: PropTypes.object,
 };
 
 Header.defaultProps = {
@@ -276,10 +359,12 @@ Header.defaultProps = {
   isAuth: false,
   setIsAuth: () => {},
   logoutUser: () => {},
+  user: {},
 };
 
 const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
+  user: state.auth.user,
 });
 
 export default connect(mapStateToProps, { setIsAuth, logoutUser })(Header);

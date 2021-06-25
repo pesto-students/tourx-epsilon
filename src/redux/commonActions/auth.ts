@@ -1,3 +1,4 @@
+import { AES } from "crypto-js";
 import { Dispatch } from "redux";
 import { GET, POST } from "../../api";
 import { AUTH_ROUTES, BACKEND_BASE_URL } from "../../api/routes";
@@ -36,9 +37,19 @@ export const authenticateUser =
   };
 
 export const loginUser = (payload: any) => async (dispatch: Dispatch) => {
+  const { REACT_APP_SALT } = process.env;
+  const encryptPassword = AES.encrypt(
+    payload.password,
+    REACT_APP_SALT || ""
+  ).toString();
+
+  const data = {
+    ...payload,
+    password: encryptPassword,
+  };
   const response: any = await POST(
     `${BACKEND_BASE_URL}/${AUTH_ROUTES}/login`,
-    payload
+    data
   );
 
   dispatch({

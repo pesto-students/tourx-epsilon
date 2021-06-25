@@ -8,8 +8,9 @@ import reportWebVitals from "./reportWebVitals";
 
 const history = createBrowserHistory();
 
+const { REACT_APP_SENTRY_URL } = process.env;
 Sentry.init({
-  dsn: "https://a24a1f9f37254da28cae7ee56e5f96f7@o859938.ingest.sentry.io/5820830",
+  dsn: REACT_APP_SENTRY_URL,
   integrations: [
     new Integrations.BrowserTracing({
       routingInstrumentation: Sentry.reactRouterV5Instrumentation(history),
