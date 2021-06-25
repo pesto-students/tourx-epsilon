@@ -27,6 +27,10 @@ const WelcomeGuide = (props: any): JSX.Element => {
     },
   ];
 
+  React.useEffect(() => {
+    document.title = "Welcome To TOURX";
+  }, []);
+
   return (
     <Container>
       <Modal>

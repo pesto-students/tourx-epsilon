@@ -23,6 +23,7 @@ function App() {
 
   // const history = createBrowserHistory();
   useEffect(() => {
+    document.title = "TOURX | Explore the best";
     setSelectedTheme(theme);
   }, [theme, themeLoaded]);
   // const myErrorHandler = (error: Error, info: { componentStack: sting }) => {

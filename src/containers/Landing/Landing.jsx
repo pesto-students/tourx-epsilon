@@ -41,6 +41,7 @@ const Landing = (props) => {
 
   const descriptionElementRef = React.useRef(null);
   React.useEffect(() => {
+    document.title = "TOURX | Explore the best";
     if (open) {
       const { current: descriptionElement } = descriptionElementRef;
       if (descriptionElement !== null) {

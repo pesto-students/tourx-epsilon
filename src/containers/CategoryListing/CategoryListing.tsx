@@ -128,6 +128,10 @@ const CategoryListing: React.FC<ListingProps> = (props) => {
     props.fetchSingleCategory(params.ct_id);
   }, []);
 
+  useEffect(() => {
+    document.title = `${activeCategory.title} | TOURX`;
+  }, [activeCategory]);
+
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
     value: number
@@ -170,7 +174,7 @@ const CategoryListing: React.FC<ListingProps> = (props) => {
       <NavHeader isTransparent={false} elevation="none" />
       <CategoryBanner data-bg={activeCategory.banner} />
       <Container>
-        <Header>Best Options on Hotels</Header>
+        <Header>Best Options on {activeCategory.title}</Header>
         <CategorySeach>
           <Input
             placeholder="Search Options In Hotels"

@@ -54,6 +54,10 @@ const DetailsPage = (props) => {
     setRating(0);
   };
 
+  useEffect(() => {
+    document.title = `${activePlace.title} | TOURX`;
+  }, [activePlace]);
+
   const isMobile = useMediaQuery("(max-width:600px)");
   return (
     <>
