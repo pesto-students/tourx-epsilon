@@ -142,7 +142,7 @@ This is an example of how to list things you need to use the software and how to
 
 #### Demo Link
 
-Project Link: [TOURX](https://d36icuji9i5ljj.cloudfront.net/)
+Project Link: [TOURX](http://projectx-frontend.s3-website-us-east-1.amazonaws.com/)
 
 ## Resources
 
@@ -210,7 +210,7 @@ Hashim Aslam - [@hashim20a](https://twitter.com/hashim20a) - hashim14aslam@gmail
 
 Krishna Kant Sharma - rohansharma.8574@gmail.com
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/krishna7860/projectx)
+
 
 <!-- ACKNOWLEDGEMENTS -->
 <!-- ## Acknowledgements
