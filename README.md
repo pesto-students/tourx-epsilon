@@ -104,7 +104,14 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    npm install
    ```
-3. Run the project
+   
+3. Add the .env file at root
+  ```REACT_APP_SENTRY_URL=https://a24a1f9f37254da28cae7ee56e5f96f7@o859938.ingest.sentry.io/5820830
+     SKIP_PREFLIGHT_CHECK=true
+     REACT_APP_BACKEND_BASE_URL=http://localhost:5001
+     REACT_APP_SALT=projectxsaltrandom```
+ 
+5. Run the project
    ```sh
    npm start
    ```
