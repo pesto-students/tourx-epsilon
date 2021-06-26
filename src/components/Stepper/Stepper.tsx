@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import { Snackbar } from "@material-ui/core";
 import React from "react";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
@@ -6,6 +7,7 @@ import { connect } from "react-redux";
 import useGenericState from "../../Library/useGenericState";
 import { StepsProps } from "./Stepper.interface";
 import { Header, Subheader, Button, ErrorLayout, ErrorSpan } from "./styles";
+import { StyledText } from "../../containers/WelcomeGuide/SignUpForm/style";
 
 const Stepper = (props: StepsProps): JSX.Element => {
   const {
@@ -16,6 +18,7 @@ const Stepper = (props: StepsProps): JSX.Element => {
     selectedState,
     selectedCity,
     selectedCategory,
+    submit,
   } = props;
 
   const [state, setState] = useGenericState({
@@ -58,6 +61,11 @@ const Stepper = (props: StepsProps): JSX.Element => {
 
     setState({ showSnackBar: false });
   };
+
+  const handleOpenLogin = () => {
+    localStorage.setItem("showWelcomeDialog", "true");
+    submit();
+  };
   return (
     <div className={className}>
       <Header>
@@ -83,29 +91,40 @@ const Stepper = (props: StepsProps): JSX.Element => {
         ))}
       </Subheader>
       {steps[state.current]}
-      <div style={{ textAlign: "right" }}>
-        {current !== children.length - 1 ? (
-          <Button
-            type="button"
-            disabled={current === steps.length - 1 && true}
-            onClick={() => handleClick(current + 1)}
-          >
-            Next
-          </Button>
-        ) : (
-          ""
-        )}
-        {current !== 0 ? (
-          <Button
-            type="button"
-            disabled={!current}
-            onClick={() => handleClick(current - 1)}
-          >
-            Previous
-          </Button>
-        ) : (
-          ""
-        )}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <StyledText onClick={handleOpenLogin}>
+          Already have an account ? Login Here
+        </StyledText>
+        <div style={{ textAlign: "right" }}>
+          {current !== children.length - 1 ? (
+            <Button
+              type="button"
+              disabled={current === steps.length - 1 && true}
+              onClick={() => handleClick(current + 1)}
+            >
+              Next
+            </Button>
+          ) : (
+            ""
+          )}
+          {current !== 0 ? (
+            <Button
+              type="button"
+              disabled={!current}
+              onClick={() => handleClick(current - 1)}
+            >
+              Previous
+            </Button>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
       <Snackbar
         open={showSnackBar}

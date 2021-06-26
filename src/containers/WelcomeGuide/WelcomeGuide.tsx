@@ -1,5 +1,7 @@
+import { Dialog, DialogContent } from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
+import Login from "../../components/LoginForm/Login";
 import Stepper from "../../components/Stepper/Stepper";
 import { RootState } from "../../redux/index.interface";
 import { showSignupForm } from "./action";
@@ -8,7 +10,7 @@ import PickPreferences from "./PickPreferences/PickPreferences";
 import Signup from "./SignUpForm/Signup";
 import { Container, Modal } from "./style";
 
-const WelcomeGuide = (props: any): JSX.Element => {
+const WelcomeGuide = (): JSX.Element => {
   const titleList = [
     {
       index: 1,
@@ -27,23 +29,45 @@ const WelcomeGuide = (props: any): JSX.Element => {
     },
   ];
 
+  const [loginOpen, setLoginOpen] = React.useState(false);
+
   React.useEffect(() => {
     document.title = "Welcome To TOURX";
   }, []);
 
   return (
     <Container>
-      <Modal>
-        <Stepper
-          initial={0}
-          titleList={titleList}
-          submit={() => props.showSignupForm()}
+      {!loginOpen && !localStorage.getItem("showWelcomeDialog") ? (
+        <Modal>
+          <Stepper
+            initial={0}
+            titleList={titleList}
+            submit={() => setLoginOpen(true)}
+          >
+            <PickLocation />
+            <PickPreferences />
+            <Signup isModal />
+          </Stepper>
+        </Modal>
+      ) : (
+        <Dialog
+          open={loginOpen}
+          onClose={() => setLoginOpen(false)}
+          scroll="paper"
+          aria-labelledby="scroll-dialog-title"
+          aria-describedby="scroll-dialog-description"
+          fullWidth
+          maxWidth="sm"
         >
-          <PickLocation />
-          <PickPreferences />
-          <Signup isModal />
-        </Stepper>
-      </Modal>
+          <DialogContent>
+            <Login
+              padding="2rem 2rem"
+              isModal
+              handleDrawerClose={() => setLoginOpen(false)}
+            />
+          </DialogContent>
+        </Dialog>
+      )}
     </Container>
   );
 };

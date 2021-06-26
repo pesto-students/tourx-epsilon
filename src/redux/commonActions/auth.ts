@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import { AES } from "crypto-js";
 import { Dispatch } from "redux";
 import { GET, POST } from "../../api";

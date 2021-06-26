@@ -4,6 +4,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
+import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import Icon from "@material-ui/core/Icon";
 import { Button, useMediaQuery } from "@material-ui/core";
@@ -21,6 +22,7 @@ const HeroComponent = (props) => {
   const [trending, setTrending] = useState(data);
   const [movedBelow, setMovedBelow] = useState(false);
   const isMobile = useMediaQuery("(max-width:600px)");
+  const history = useHistory();
   const changeNavbarColor = () => {
     if (window.scrollY >= 80) {
       setMovedBelow(true);
@@ -101,6 +103,13 @@ const HeroComponent = (props) => {
               color="primary"
               size={isMobile ? "small" : "large"}
               endIcon={<Icon>send</Icon>}
+              onClick={() =>
+                history.push(
+                  `/places/${trending[state.activeSlide].title}/${
+                    trending[state.activeSlide]._id
+                  }`
+                )
+              }
             >
               Explore
             </Button>

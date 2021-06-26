@@ -73,3 +73,12 @@ export const ButtonWrapper = styled.div`
   margin: 2rem 0rem;
   width: 100%;
 `;
+
+export const StyledText = styled.p`
+  color: black;
+  text-decoration: underline;
+  font-size: 14px;
+  margin: 1.5rem 1rem;
+  cursor: pointer;
+  text-align: left;
+`;
