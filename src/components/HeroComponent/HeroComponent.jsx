@@ -15,11 +15,10 @@ import {
   addToFavourait,
   fetchPopularPlaces,
 } from "../../containers/Landing/component/CategorySection/action";
-import data from "../Slider/data";
 
 const HeroComponent = (props) => {
   const [state, setState] = useState({ oldSlide: 0, activeSlide: 0 });
-  const [trending, setTrending] = useState(data);
+  const [trending, setTrending] = useState([]);
   const [movedBelow, setMovedBelow] = useState(false);
   const isMobile = useMediaQuery("(max-width:600px)");
   const history = useHistory();
@@ -31,7 +30,7 @@ const HeroComponent = (props) => {
     }
   };
 
-  const { places, user } = props;
+  const { places, user, loading } = props;
   useEffect(() => {
     props.fetchPopularPlaces();
     window.addEventListener("scroll", changeNavbarColor);
@@ -77,52 +76,56 @@ const HeroComponent = (props) => {
 
   return (
     <AnimatePresence>
-      <Section bg={trending[state.activeSlide].images[1]}>
-        {movedBelow ? (
-          <Header isTransparent={false} />
-        ) : (
-          <Header isTransparent />
-        )}
+      {!loading ? (
+        <Section bg={trending[state.activeSlide]?.images[1]}>
+          {movedBelow ? (
+            <Header isTransparent={false} />
+          ) : (
+            <Header isTransparent />
+          )}
 
-        {/* <Container src={data[state.activeSlide].bg_url} alt="heroImage" /> */}
-        <Wrapper>
-          <InfoWrapper
-            key={trending[state.activeSlide]._id}
-            variants={variants}
-            initial="hidden"
-            animate="show"
-          >
-            <Title variants={item}>
-              {trending[state.activeSlide].subTitle}
-            </Title>
-            <Info variants={item}>
-              {trending[state.activeSlide].description}
-            </Info>
-            <Button
-              variant="contained"
-              color="primary"
-              size={isMobile ? "small" : "large"}
-              endIcon={<Icon>send</Icon>}
-              onClick={() =>
-                history.push(
-                  `/places/${trending[state.activeSlide].title}/${
-                    trending[state.activeSlide]._id
-                  }`
-                )
-              }
+          {/* <Container src={data[state.activeSlide]?.bg_url} alt="heroImage" /> */}
+          <Wrapper>
+            <InfoWrapper
+              key={trending[state.activeSlide]?._id}
+              variants={variants}
+              initial="hidden"
+              animate="show"
             >
-              Explore
-            </Button>
-          </InfoWrapper>
-          <Slider
-            setState={setState}
-            items={trending}
-            activeSlide={state.activeSlide}
-            addToFavourait={props.addToFavourait}
-            user={user}
-          />
-        </Wrapper>
-      </Section>
+              <Title variants={item}>
+                {trending[state.activeSlide]?.subTitle}
+              </Title>
+              <Info variants={item}>
+                {trending[state.activeSlide]?.description}
+              </Info>
+              <Button
+                variant="contained"
+                color="primary"
+                size={isMobile ? "small" : "large"}
+                endIcon={<Icon>send</Icon>}
+                onClick={() =>
+                  history.push(
+                    `/places/${trending[state.activeSlide]?.title}/${
+                      trending[state.activeSlide]?._id
+                    }`
+                  )
+                }
+              >
+                Explore
+              </Button>
+            </InfoWrapper>
+            <Slider
+              setState={setState}
+              items={trending}
+              activeSlide={state.activeSlide}
+              addToFavourait={props.addToFavourait}
+              user={user}
+            />
+          </Wrapper>
+        </Section>
+      ) : (
+        <div />
+      )}
     </AnimatePresence>
   );
 };
@@ -130,6 +133,7 @@ const HeroComponent = (props) => {
 const mapStateToProps = (state) => ({
   places: state.places.popularPlaces,
   user: state.auth.user,
+  loading: state.places.loading,
 });
 
 export default connect(mapStateToProps, { fetchPopularPlaces, addToFavourait })(
