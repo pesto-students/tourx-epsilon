@@ -12,6 +12,7 @@ const Input = (props: InputProps): JSX.Element => {
       style={style}
       data-icon={icon}
       type={type}
+      autoFocus
     />
   );
 };

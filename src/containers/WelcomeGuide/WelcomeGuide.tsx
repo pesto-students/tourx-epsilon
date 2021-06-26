@@ -38,7 +38,7 @@ const WelcomeGuide = (): JSX.Element => {
   return (
     <Container>
       {!loginOpen && !localStorage.getItem("showWelcomeDialog") ? (
-        <Modal>
+        <Modal data-test="welcome-modal">
           <Stepper
             initial={0}
             titleList={titleList}

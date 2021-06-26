@@ -123,7 +123,7 @@ const Signup = (props: any): JSX.Element => {
         />
       </InputContainer>
       <LabelContainer>
-        <StyledCheckBox onChange={handleChange} />
+        <StyledCheckBox data-test="signup-checkbox" onChange={handleChange} />
         <Span>I agree to the terms and conditions</Span>
       </LabelContainer>
       <ButtonWrapper>

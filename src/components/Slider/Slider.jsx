@@ -92,6 +92,7 @@ const HeroSlider = ({ items, setState, activeSlide, addToFavourait, user }) => {
           width="35px"
           height="35px"
           onClick={handlePrev}
+          data-test="prev"
         />
         <div style={{ marginRight: "5px" }} />
         <NavBack
@@ -99,6 +100,7 @@ const HeroSlider = ({ items, setState, activeSlide, addToFavourait, user }) => {
           width="35px"
           height="35px"
           onClick={handleNext}
+          data-test="next"
         />
       </NavWrapper>
     </div>

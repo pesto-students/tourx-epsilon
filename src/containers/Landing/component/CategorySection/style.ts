@@ -110,6 +110,7 @@ export const CatagoryCard = styled.div`
   position: relative;
   border-radius: 20px;
   box-shadow: 0 0 27px 0 rgb(0 0 0 / 15%);
+  margin-right: 12px;
 
   overflow: hidden;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),

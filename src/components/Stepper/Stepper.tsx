@@ -69,7 +69,7 @@ const Stepper = (props: StepsProps): JSX.Element => {
   return (
     <div className={className}>
       <Header>
-        <h4>{titleList[current].title}</h4>
+        <h4 data-test="welcome-header">{titleList[current].title}</h4>
       </Header>
       <Subheader>
         {titleList.map((title, index) => (

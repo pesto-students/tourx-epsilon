@@ -115,6 +115,7 @@ const PickPreferences = (props: any): JSX.Element => {
               <CatagoryCard
                 key={category.title}
                 onClick={() => setSelected(category)}
+                data-test="category-card"
               >
                 <ImageContainer
                   className={

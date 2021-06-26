@@ -59,6 +59,7 @@ const SelectBox = (props: SelectBoxProps): JSX.Element => {
             <Options
               key={option._id}
               data-value={option.slug}
+              data-test="select-options"
               onClick={() => {
                 handleInputChange(option.title ?? option.name);
               }}
