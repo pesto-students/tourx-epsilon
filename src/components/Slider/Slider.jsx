@@ -74,7 +74,7 @@ const HeroSlider = ({ items, setState, activeSlide, addToFavourait, user }) => {
   return (
     <div className="slider-wrapper">
       <Slider {...settings} ref={(c) => (slide = c)}>
-        {items.map((item, index) => {
+        {items?.map((item, index) => {
           return (
             <SliderCard
               item={item}
