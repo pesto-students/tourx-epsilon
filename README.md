@@ -2,9 +2,9 @@
 <br />
 
 <div style="display:flex;justify-content:center"> 
-<img src="https://projectx-assets.s3.amazonaws.com/Screenshot+2021-06-26+at+7.35.14+PM.png" style="margin:0px 12px;width:350px"></img>
-<img src="https://projectx-assets.s3.amazonaws.com/Screenshot+2021-06-26+at+7.37.41+PM.png" style="margin:0px 12px;width:350px"></img>
-<img src="https://projectx-assets.s3.amazonaws.com/Screenshot+2021-06-26+at+7.37.53+PM.png" style="margin:0px 12px; width:350px"></img>
+<img src="https://projectx-assets.s3.amazonaws.com/Screenshot+2021-06-26+at+7.35.14+PM-min.png" style="margin:0px 12px;width:350px"></img>
+<img src="https://projectx-assets.s3.amazonaws.com/Screenshot+2021-06-26+at+7.37.41+PM-min.png" style="margin:0px 12px;width:350px"></img>
+<img src="https://projectx-assets.s3.amazonaws.com/Screenshot+2021-06-26+at+7.37.53+PM-min.png" style="margin:0px 12px; width:350px"></img>
 </div>
 <p align="center">
   <a href="https://github.com/krishna7860/projectx">
@@ -31,6 +31,9 @@ us to make this experience better
     <a href="https://github.com/github_username/repo_name/issues">Request Feature</a> -->
   </p>
 </p>
+
+
+
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
