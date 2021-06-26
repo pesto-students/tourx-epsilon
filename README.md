@@ -142,7 +142,7 @@ This is an example of how to list things you need to use the software and how to
 
 #### Demo Link
 
-Project Link: [TOURX](http://projectx-frontend.s3-website-us-east-1.amazonaws.com/)
+Project Link: [TOURX](https://d36icuji9i5ljj.cloudfront.net/)
 
 ## Resources
 
@@ -150,6 +150,10 @@ Project Link: [TOURX](http://projectx-frontend.s3-website-us-east-1.amazonaws.co
 - [One pager](https://drive.google.com/file/d/1sPRyaOVeg89UgJQ9Vayo-MbqTAAZAJpb/view?usp=sharing)
 - [PRD](https://drive.google.com/file/d/1a250tCIrtPWT8voaE1qEu1s50K6OBG6e/view?usp=sharing)
 - [High Level Design](https://drive.google.com/file/d/1TXJrpkhoZhNyV4asIMc0_gWJistlt3N_/view?usp=sharing)
+
+## Schema Design
+
+<img src="https://ik.imagekit.io/xguwklrkajw/N2-Epsilon-Database-Diagram_wBIev4hkG.jpg" >
 
 <!-- ROADMAP -->
 
@@ -210,7 +214,7 @@ Hashim Aslam - [@hashim20a](https://twitter.com/hashim20a) - hashim14aslam@gmail
 
 Krishna Kant Sharma - rohansharma.8574@gmail.com
 
-
+Project Link: [https://github.com/github_username/repo_name](https://github.com/krishna7860/projectx)
 
 <!-- ACKNOWLEDGEMENTS -->
 <!-- ## Acknowledgements
