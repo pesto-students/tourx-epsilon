@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/Header should be rendered properly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bdnxRM WKGpf"
+    elevation="none"
+  >
+    <header>
+      <header
+        class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorInherit sc-gKAaRy dvkorR mui-fixed MuiPaper-elevation4"
+      >
+        <div
+          class="MuiToolbar-root MuiToolbar-regular sc-gtsrHT iddZFI MuiToolbar-gutters"
+        >
+          <a
+            class="sc-hKFxyN btYNzt"
+            href="/"
+          >
+            <div
+              class="sc-eCApnc bCwWAa"
+            >
+              TourX
+            </div>
+          </a>
+          <div>
+            <a
+              href="/category/9023132"
+            >
+              <button
+                class="MuiButtonBase-root MuiButton-root MuiButton-text sc-jSFjdj TSbCx"
+                tabindex="0"
+                type="button"
+              >
+                <span
+                  class="MuiButton-label"
+                >
+                  Categories
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </a>
+            <a
+              href="/"
+            >
+              <button
+                class="MuiButtonBase-root MuiButton-root MuiButton-text sc-jSFjdj TSbCx"
+                tabindex="0"
+                type="button"
+              >
+                <span
+                  class="MuiButton-label"
+                >
+                  About us
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </a>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined sc-iCoGMd fXLviD"
+              outline="outline"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                Login
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-contained sc-iCoGMd bsVGjY"
+              outline="contained"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                SignUp
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+      </header>
+    </header>
+  </div>
+</DocumentFragment>
+`;

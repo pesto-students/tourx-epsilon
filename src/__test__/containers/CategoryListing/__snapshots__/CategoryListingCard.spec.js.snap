@@ -1,0 +1,267 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`container/CategoryListings/CategoryListingCard should be rendered properly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bdnxRM bQFRFZ"
+  >
+    <div
+      class="sc-gtsrHT eAzybY"
+    >
+      <div
+        class="sc-jSFjdj jkpjtA"
+      >
+        <img
+          alt="no-img"
+          class="sc-iCoGMd jTVZJd"
+          src="https://images.unsplash.com/photo-1596386461350-326ccb383e9f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aG90ZWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
+        />
+      </div>
+      <div
+        class="sc-gKAaRy fVNJrS"
+      >
+        <div
+          class="sc-dlnjwi iJEReS"
+        >
+          <div>
+            <p
+              class="sc-hKFxyN bIFEq"
+            >
+              Hotels
+            </p>
+            <p
+              class="sc-eCApnc tOzkx"
+            >
+              1200 Star
+            </p>
+          </div>
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root"
+            focusable="false"
+            style="color: rgb(153, 159, 170); font-size: 32px;"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"
+            />
+          </svg>
+        </div>
+        <p
+          class="sc-fujyAs iuBhET"
+        >
+          Over 900,000 Hotels Worldwide. Book Now, Pay When You Stay. List Your Property. View Articles. Register Online. Sign Up For Deals.
+        </p>
+        <p
+          class="sc-pNWdM jXHAZ"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root"
+            focusable="false"
+            style="color: rgb(153, 159, 170); font-size: 16px;"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
+            />
+          </svg>
+          <span
+            class="sc-jrsJWt kfnKJf"
+          >
+            12345
+          </span>
+        </p>
+        <div
+          class="sc-dIsUp khNuc"
+        >
+          <div
+            class="MuiButtonBase-root MuiChip-root MuiChip-sizeSmall MuiChip-clickable"
+            role="button"
+            tabindex="0"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiChip-icon MuiChip-iconSmall"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M22 11h-4.17l3.24-3.24-1.41-1.42L15 11h-2V9l4.66-4.66-1.42-1.41L13 6.17V2h-2v4.17L7.76 2.93 6.34 4.34 11 9v2H9L4.34 6.34 2.93 7.76 6.17 11H2v2h4.17l-3.24 3.24 1.41 1.42L9 13h2v2l-4.66 4.66 1.42 1.41L11 17.83V22h2v-4.17l3.24 3.24 1.42-1.41L13 15v-2h2l4.66 4.66 1.41-1.42L17.83 13H22z"
+              />
+            </svg>
+            <span
+              class="MuiChip-label MuiChip-labelSmall"
+            >
+              AC
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </div>
+          <div
+            class="MuiButtonBase-root MuiChip-root MuiChip-sizeSmall MuiChip-clickable"
+            role="button"
+            tabindex="0"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiChip-icon MuiChip-iconSmall"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M18.92 5.01C18.72 4.42 18.16 4 17.5 4h-11c-.66 0-1.21.42-1.42 1.01L3 11v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 15c-.83 0-1.5-.67-1.5-1.5S5.67 12 6.5 12s1.5.67 1.5 1.5S7.33 15 6.5 15zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 10l1.5-4.5h11L19 10H5z"
+              />
+            </svg>
+            <span
+              class="MuiChip-label MuiChip-labelSmall"
+            >
+              Parking
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </div>
+          <div
+            class="MuiButtonBase-root MuiChip-root MuiChip-sizeSmall MuiChip-clickable"
+            role="button"
+            tabindex="0"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiChip-icon MuiChip-iconSmall"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.9 2-2V5c0-1.11-.89-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z"
+              />
+            </svg>
+            <span
+              class="MuiChip-label MuiChip-labelSmall"
+            >
+              Breakfast
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </div>
+        </div>
+      </div>
+      <hr
+        class="MuiDivider-root MuiDivider-flexItem MuiDivider-vertical"
+      />
+      <div
+        class="sc-kEqXSa jlKRlw"
+      >
+        <div
+          class="MuiAvatar-root MuiAvatar-circle"
+        >
+          <img
+            alt="Remy Sharp"
+            class="MuiAvatar-img"
+            src="/static/images/avatar/1.jpg"
+          />
+        </div>
+        <p
+          class="sc-iqAclL jIVEYJ"
+        >
+          Mr. J. Camaron
+        </p>
+        <span
+          aria-label="4 Stars"
+          class="MuiRating-root MuiRating-readOnly"
+          role="img"
+        >
+          <span>
+            <span
+              class="MuiRating-icon MuiRating-iconFilled"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                />
+              </svg>
+            </span>
+          </span>
+          <span>
+            <span
+              class="MuiRating-icon MuiRating-iconFilled"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                />
+              </svg>
+            </span>
+          </span>
+          <span>
+            <span
+              class="MuiRating-icon MuiRating-iconFilled"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                />
+              </svg>
+            </span>
+          </span>
+          <span>
+            <span
+              class="MuiRating-icon MuiRating-iconFilled"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                />
+              </svg>
+            </span>
+          </span>
+          <span>
+            <span
+              class="MuiRating-icon MuiRating-iconEmpty"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                />
+              </svg>
+            </span>
+          </span>
+        </span>
+        <span
+          class="sc-crzoAE GFLEn"
+        >
+          This is the best hotels I have ever visit, thanks for the best services
+        </span>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,55 @@
+{
+  "data": {
+    "light": {
+      "id": "T_001",
+      "name": "Light",
+      "colors": {
+        "body": "#FFFFFF",
+        "text": "#000000",
+        "text-1": "#3C4257",
+        "text-3": "#999FAA",
+        "text-4": "#837A7A",
+        "text-5": "#747373",
+        "white": "#FFFFFF",
+        "black": "#202021",
+        "inputBg": "#F2F4F8",
+        "gray-1": "#E8EAEE",
+        "gray-2": "#C4C4C4",
+        "gray-3": "#888383",
+        "purple_1": "#6181F3",
+        "gold-1": "#C0980A"
+      },
+      "fonts": {
+        "header": {
+          "size": "20px",
+          "weight": "normal",
+          "lineHeight": "1"
+        },
+        "textFade": {
+          "size": "14px",
+          "color": "#b8bcca"
+        }
+      }
+    },
+    "dark": {
+      "id": "T_002",
+      "name": "dark",
+      "colors": {
+        "body": "#FFFFFF",
+        "text": "#000000",
+        "text-1": "#3C4257",
+        "text-3": "#999FAA",
+        "text-4": "#837A7A",
+        "text-5": "#747373",
+        "white": "#FFFFFF",
+        "black": "#202021",
+        "inputBg": "#F2F4F8",
+        "gray-1": "#E8EAEE",
+        "gray-2": "#C4C4C4",
+        "gray-3": "#888383",
+        "purple-1": "#6181F3",
+        "gold-1": "#C0980A"
+      }
+    }
+  }
+}

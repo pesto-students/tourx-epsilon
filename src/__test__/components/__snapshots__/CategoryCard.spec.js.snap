@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/categoryCard should be rendered properly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bdnxRM bpwbdL"
+  >
+    <div
+      class="sc-gtsrHT jiMVHD"
+    >
+      <img
+        class="sc-dlnjwi htgYQL"
+        src="https://res.cloudinary.com/thrillophilia/image/upload/c_fill,dpr_1.5,f_auto,fl_progressive.strip_profile,g_center,h_183,q_auto,w_245/v1/filestore/ivniu6zyafkwdxaggg7jl7msro47_27023582_1061778550630758_383729866060832850_o.jpg"
+      />
+    </div>
+    <div
+      class="sc-hKFxyN dXkjxw"
+    >
+      <p
+        class="sc-eCApnc dSgpmJ"
+      >
+        Hotel
+      </p>
+      <p
+        class="sc-jSFjdj eKXNkF"
+      >
+        Sample description
+      </p>
+    </div>
+  </div>
+</DocumentFragment>
+`;

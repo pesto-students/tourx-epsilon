@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/SelectBox should be rendered properly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bdnxRM hLnSep selectBox"
+  >
+    <input
+      class="sc-gtsrHT eXYDDY"
+      placeholder="Please Select State"
+      value=""
+    />
+  </div>
+</DocumentFragment>
+`;
