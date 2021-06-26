@@ -83,10 +83,12 @@ function SimilarOptions(props) {
     <Wrapper padding={padding} margin={margin}>
       <Slider {...settings} ref={(c) => (slide = c)}>
         {loading
-          ? [1, 2, 3, 4, 5, 5].map(() => <SkeletonWrapper height="350px" />)
+          ? [1, 2, 3, 4, 5, 5].map((e) => (
+              <SkeletonWrapper key={e} height="350px" />
+            ))
           : places.map((i) => {
               return (
-                <StyledLink to={`/places/${i.title}/${i._id}`}>
+                <StyledLink key={i._id} to={`/places/${i.title}/${i._id}`}>
                   <Container>
                     <InnerWrapper>
                       <CardView item={i} />

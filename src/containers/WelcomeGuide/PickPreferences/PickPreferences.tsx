@@ -134,8 +134,8 @@ const PickPreferences = (props: any): JSX.Element => {
                 <div />
               </CatagoryCard>
             ))
-          : [1, 2, 3, 4].map(() => (
-              <SkeletonContainer>
+          : [1, 2, 3, 4].map((e) => (
+              <SkeletonContainer key={e}>
                 <Skeleton
                   animation="wave"
                   variant="circle"

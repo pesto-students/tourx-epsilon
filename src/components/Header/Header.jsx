@@ -12,9 +12,7 @@ import {
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
-import { uuid } from "uuidv4";
 import {
   HeaderWrapper,
   StyledToolbar,
@@ -35,6 +33,7 @@ import {
 import { setIsAuth, logoutUser } from "../../redux/commonActions/auth";
 import Signup from "../../containers/WelcomeGuide/SignUpForm/Signup";
 import Login from "../LoginForm/Login";
+import About from "../About/About";
 
 const headersData = [
   {
@@ -57,9 +56,11 @@ const Header = ({
     open: false,
     loginOpen: false,
     profileOpen: false,
+    aboutOpen: false,
   });
 
-  const { mobileView, drawerOpen, open, loginOpen, profileOpen } = state;
+  const { mobileView, drawerOpen, open, loginOpen, profileOpen, aboutOpen } =
+    state;
 
   useEffect(() => {
     const setResponsiveness = () => {
@@ -117,18 +118,18 @@ const Header = ({
   const getMenuButtons = () => {
     return (
       <>
-        {headersData.map(({ label, href }) => {
+        {headersData.map(({ label }) => {
           return (
-            <Link to={href} key={uuid()}>
-              <MenuButton
-                {...{
-                  key: label,
-                }}
-                isTransparent={isTransparent}
-              >
-                {label}
-              </MenuButton>
-            </Link>
+            <MenuButton
+              {...{
+                key: label,
+              }}
+              isTransparent={isTransparent}
+              onClick={() => setState({ ...state, aboutOpen: true })}
+              key={label}
+            >
+              {label}
+            </MenuButton>
           );
         })}
         {isAuth ? (
@@ -208,6 +209,20 @@ const Header = ({
             />
           </DialogContent>
         </Dialog>
+
+        <Dialog
+          open={aboutOpen}
+          onClose={() => setState({ ...state, aboutOpen: false })}
+          scroll="paper"
+          aria-labelledby="scroll-dialog-title"
+          aria-describedby="scroll-dialog-description"
+          fullWidth
+          maxWidth="sm"
+        >
+          <DialogContent>
+            <About />
+          </DialogContent>
+        </Dialog>
       </>
     );
   };
@@ -216,7 +231,7 @@ const Header = ({
     return (
       <>
         {headersData.map(({ label }) => {
-          return <MenuItem>{label}</MenuItem>;
+          return <MenuItem key={label}>{label}</MenuItem>;
         })}
       </>
     );

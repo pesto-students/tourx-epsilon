@@ -212,8 +212,8 @@ const CategoryListing: React.FC<ListingProps> = (props) => {
             </FilterSection>
             <DisplaySection>
               {loading ? (
-                [1, 2, 3, 4, 5].map(() => (
-                  <SkeletonWrapper>
+                [1, 2, 3, 4, 5].map((e) => (
+                  <SkeletonWrapper key={e}>
                     <Skeleton
                       style={{ borderRadius: "12px" }}
                       variant="rect"
@@ -265,7 +265,10 @@ const CategoryListing: React.FC<ListingProps> = (props) => {
                 ))
               ) : places.length ? (
                 places.map((item: any) => (
-                  <StyledLink to={`/places/${item.title}/${item._id}`}>
+                  <StyledLink
+                    key={item._id}
+                    to={`/places/${item.title}/${item._id}`}
+                  >
                     <CategoryListingCard cardDetails={item} />
                   </StyledLink>
                 ))

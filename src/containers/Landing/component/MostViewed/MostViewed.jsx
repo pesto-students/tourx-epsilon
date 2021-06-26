@@ -84,7 +84,7 @@ function MostViewed(props) {
       <Slider {...settings} ref={(c) => (slide = c)}>
         {mostViewed.map((i) => {
           return (
-            <StyledLink to={`/places/${i.title}/${i._id}`}>
+            <StyledLink key={i._id} to={`/places/${i.title}/${i._id}`}>
               <Container>
                 <InnerWrapper>
                   <CardView item={i} />

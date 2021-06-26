@@ -16,7 +16,7 @@ const OptionCard: React.FC<OptionProps> = (props) => {
       <Hr />
 
       {filters.map((filter: any) => (
-        <Span>
+        <Span key={filter.id}>
           <Checkbox
             defaultChecked={false}
             color="default"

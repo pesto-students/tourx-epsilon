@@ -53,6 +53,7 @@ export default function CategoryListingCard({ cardDetails }) {
           <ChipContainer>
             {cardDetails.options.map((option) => (
               <Chip
+                key={option.title}
                 size="small"
                 icon={<AcUnitIcon />}
                 onClick={handleClick}

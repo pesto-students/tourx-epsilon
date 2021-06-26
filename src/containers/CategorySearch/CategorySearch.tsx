@@ -54,8 +54,8 @@ const CategorySearch = (props: any): JSX.Element => {
 
         <CategoryContainer>
           {loading ? (
-            Array.from(new Array(6)).map(() => (
-              <Box pt={0.5} style={{ width: "200px", margin: "auto" }}>
+            Array.from(new Array(6)).map((e) => (
+              <Box key={e} pt={0.5} style={{ width: "200px", margin: "auto" }}>
                 <Skeleton style={{ height: "220px" }} />
                 <Skeleton />
                 <Skeleton width="60%" />
@@ -66,6 +66,7 @@ const CategorySearch = (props: any): JSX.Element => {
           ) : (
             categories.map((category: Category) => (
               <StyledLink
+                key={category._id}
                 to={`/category/${category.title.toLowerCase()}/${category._id}`}
               >
                 <CategoryCard

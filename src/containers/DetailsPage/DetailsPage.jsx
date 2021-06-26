@@ -110,7 +110,7 @@ const DetailsPage = (props) => {
             <div>
               <OverviewTitle>Highlights</OverviewTitle>
               {activePlace?.highlights?.map((item) => (
-                <Wrapper>
+                <Wrapper key={item}>
                   <HighLightIcon color="#59A5FF" width="25px" height="25px" />
                   <HighlightsDesc>{item}</HighlightsDesc>
                 </Wrapper>
@@ -123,7 +123,7 @@ const DetailsPage = (props) => {
           <ReviewSection>
             <Grid container spacing={3}>
               {activePlace?.reviews?.slice(0, 6).map((review) => (
-                <Grid item xs={12} lg={4} md={6} sm={12}>
+                <Grid key={review._id} item xs={12} lg={4} md={6} sm={12}>
                   <ReviewsCard review={review} />
                 </Grid>
               ))}

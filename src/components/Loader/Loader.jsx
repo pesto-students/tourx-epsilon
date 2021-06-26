@@ -1,11 +1,14 @@
 import React from "react";
-import { CircularProgress } from "@material-ui/core";
+import { LinearProgress } from "@material-ui/core";
 import { Conatiner } from "./Style";
+import { Image } from "../About/style";
+import Logo from "../../static/logo.png";
 
 function Loader() {
   return (
     <Conatiner>
-      <CircularProgress />
+      <Image src={Logo} alt="Logo" />
+      <LinearProgress style={{ width: "100px", marginTop: "12px" }} />
     </Conatiner>
   );
 }

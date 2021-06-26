@@ -61,9 +61,9 @@ const CategorySection = (props: any) => {
       </BannerWrapper>
       <InnerWrapper>
         {loading
-          ? [1, 2, 3, 4, 5, 6, 7, 8].map(() => <SkeletonWrapper />)
+          ? [1, 2, 3, 4, 5, 6, 7, 8].map((e) => <SkeletonWrapper key={e} />)
           : categories.slice(1, 9).map((category: Category) => (
-              <CatagoryCard data-bg={category.imageUrl}>
+              <CatagoryCard key={category._id} data-bg={category.imageUrl}>
                 <StyledLink to={`/category/${category.title}/${category._id}`}>
                   <Text>{category.title}</Text>
                 </StyledLink>

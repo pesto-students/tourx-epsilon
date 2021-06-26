@@ -42,7 +42,7 @@ const ImageGallery = ({ setState, data }: any) => {
           <SubGrid>
             {data.slice(1).map((i: string, index: number) => {
               return (
-                <SubItem>
+                <SubItem key={uuid()}>
                   <SubItemImg
                     src={
                       i ??
