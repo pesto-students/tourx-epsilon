@@ -148,7 +148,7 @@ Project Link: [TOURX](https://d36icuji9i5ljj.cloudfront.net/)
 
 - [Design Files](https://www.figma.com/file/zyctQbIMo12egZvvI91hnI/TourX?node-id=0%3A1)
 - [One pager](https://drive.google.com/file/d/1sPRyaOVeg89UgJQ9Vayo-MbqTAAZAJpb/view?usp=sharing)
-- [PRD](https://drive.google.com/file/d/1a250tCIrtPWT8voaE1qEu1s50K6OBG6e/view?usp=sharing)
+- [PRD](https://drive.google.com/file/d/1Gr4wiin-_2XSfmYcS-adii9GXgQc8a_d/view?usp=sharing)
 - [High Level Design](https://drive.google.com/file/d/1TXJrpkhoZhNyV4asIMc0_gWJistlt3N_/view?usp=sharing)
 
 ## Schema Design
